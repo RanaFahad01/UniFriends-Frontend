@@ -1,0 +1,64 @@
+.header {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 50;
+  display: flex;
+  gap: 1rem;
+}
+
+.button {
+  clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  border-radius: 0;
+  transition: all 300ms ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  min-height: 50px;
+}
+
+.loginButton {
+  composes: button;
+  border: 2px solid var(--mantine-color-neonCyan-6);
+  color: var(--mantine-color-neonCyan-6);
+  background: transparent;
+}
+
+.loginButton:hover {
+  background: rgba(0, 238, 252, 0.1);
+}
+
+.signupButton {
+  composes: button;
+  background: var(--mantine-color-neonMagenta-3);
+  color: #1a0058;
+  border: none;
+  box-shadow: 0 0 15px rgba(180, 124, 255, 0.4);
+}
+
+.signupButton:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile styles */
+@media (max-width: $mantine-breakpoint-sm) {
+  .header {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .button {
+    font-size: 0.75rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    min-height: 40px;
+  }
+}

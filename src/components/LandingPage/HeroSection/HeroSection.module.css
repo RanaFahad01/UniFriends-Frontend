@@ -1,0 +1,69 @@
+@keyframes flicker {
+
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 8px rgba(255, 215, 0, 0.8),
+      0 0 20px rgba(255, 215, 0, 0.5);
+  }
+
+  20%,
+  24%,
+  55% {
+    opacity: 0.6;
+    text-shadow: none;
+  }
+}
+
+.section {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.subtitle {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4vw, 2rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.75rem;
+}
+
+.logoBox {
+  display: inline-block;
+  transform: rotate(-3deg);
+  border: 4px solid var(--mantine-color-neonGold-5);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  background: #1a1919;
+  padding: 1rem 1.5rem;
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 8vw, 5rem);
+  letter-spacing: 0.15em;
+  color: var(--mantine-color-neonGold-5);
+  line-height: 1;
+  animation: flicker 3s infinite;
+}
+
+.logo,
+.subtitle {
+  user-select: none;
+
+}
+
+/* Tablet and desktop styles */
+@media (min-width: $mantine-breakpoint-sm) {
+  .logoBox {
+    padding: 1rem 3rem;
+  }
+
+}

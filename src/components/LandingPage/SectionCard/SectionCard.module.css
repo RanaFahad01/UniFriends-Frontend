@@ -1,0 +1,123 @@
+.card {
+  background: #1a1919;
+  /* padding: 3rem; */
+  padding: 2rem;
+  transition: background-color, transform 500ms ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.card[data-variant='academics'] {
+  padding-right: 3rem;
+}
+
+.card[data-variant='extracurriculars'] {
+  padding-left: 3rem;
+}
+
+@media (min-width: $mantine-breakpoint-xs) {
+  .card {
+    padding: 3rem;
+  }
+
+  .card[data-variant='academics'] {
+    padding-right: 5rem;
+  }
+
+  .card[data-variant='extracurriculars'] {
+    padding-left: 5rem;
+  }
+}
+
+@media (min-width: $mantine-breakpoint-sm) {
+  .card {
+    padding: 3rem;
+  }
+
+  .card[data-variant='academics'] {
+    padding-right: 7rem;
+  }
+
+  .card[data-variant='extracurriculars'] {
+    padding-left: 7rem;
+  }
+}
+
+/* Academics variant */
+.card[data-variant='academics'] {
+  clip-path: polygon(0 0, 100% 5%, 85% 100%, 0 100%);
+  border-left: 8px solid var(--mantine-color-neonCyan-6);
+}
+
+.card[data-variant='academics']:hover {
+  background: rgba(0, 238, 252, 0.05);
+}
+
+/* Extracurriculars variant */
+.card[data-variant='extracurriculars'] {
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 95%);
+  border-right: 8px solid var(--mantine-color-neonMagenta-3);
+  text-align: right;
+}
+
+.card[data-variant='extracurriculars']:hover {
+  background: rgba(180, 124, 255, 0.05);
+}
+
+@media (min-width: $mantine-breakpoint-md) {
+  .card[data-variant='extracurriculars'] {
+    margin-top: 2rem;
+  }
+}
+
+.heading {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.card[data-variant='academics'] .heading {
+  color: var(--mantine-color-neonCyan-6);
+}
+
+.card[data-variant='extracurriculars'] .heading {
+  color: var(--mantine-color-neonMagenta-3);
+}
+
+.description {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #adaaaa;
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    font-size: 1rem;
+  }
+}
+
+.description+.description {
+  margin-top: 0.75rem;
+}
+
+.accent {
+  height: 4px;
+  width: 6rem;
+  margin-top: 1.5rem;
+  opacity: 0.3;
+}
+
+.card[data-variant='academics'] .accent {
+  background: var(--mantine-color-neonCyan-6);
+}
+
+.card[data-variant='extracurriculars'] .accent {
+  background: var(--mantine-color-neonMagenta-3);
+  margin-left: auto;
+}
