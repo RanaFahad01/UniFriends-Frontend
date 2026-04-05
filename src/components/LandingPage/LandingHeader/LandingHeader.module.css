@@ -30,6 +30,10 @@
   border: 2px solid var(--mantine-color-neonCyan-6);
   color: var(--mantine-color-neonCyan-6);
   background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .loginButton:hover {
