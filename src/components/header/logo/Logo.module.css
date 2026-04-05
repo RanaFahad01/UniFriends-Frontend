@@ -1,0 +1,27 @@
+.logoBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* padding: 0.2rem 0.3rem 0.2rem 0.5rem; */
+    height: 100%;
+}
+
+.logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: 0.15em;
+    color: var(--mantine-color-neonGold-5);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    transform: translateY(0.05em);
+
+
+    line-height: 1;
+    margin: 0;
+
+}
+
+.logo,
+.logoBox {
+    user-select: none;
+}
