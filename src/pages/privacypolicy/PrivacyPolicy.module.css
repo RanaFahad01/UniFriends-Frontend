@@ -1,0 +1,127 @@
+.page {
+    min-height: 100vh;
+    background: #0e0e0e;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem 4rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 52rem;
+}
+
+.title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--mantine-color-neonCyan-3);
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+}
+
+.lastUpdated {
+    margin-bottom: 2rem;
+}
+
+.sectionHeading {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--mantine-color-neonCyan-4);
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.subHeading {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--mantine-color-neonCyan-5);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.accent {
+    height: 3px;
+    width: 100%;
+    max-width: 12rem;
+    background: var(--mantine-color-neonCyan-6);
+    opacity: 0.4;
+    margin-bottom: 2rem;
+}
+
+.body {
+    font-size: var(--mantine-font-size-sm);
+    line-height: 1.7;
+    color: var(--mantine-color-dark-1);
+}
+
+.body p {
+    margin-bottom: 0.75rem;
+}
+
+.body ul,
+.body ol {
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.body ul {
+    list-style-type: square;
+}
+
+.body ul ul {
+    list-style-type: circle;
+}
+
+.body li {
+    margin-bottom: 0.35rem;
+}
+
+.tocList {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+}
+
+.tocList li {
+    margin-bottom: 0.4rem;
+}
+
+.inShort {
+    font-style: italic;
+    color: var(--mantine-color-dark-2);
+    margin-bottom: 0.75rem;
+}
+
+.contactBlock {
+    margin-top: 0.5rem;
+    line-height: 1.8;
+}
+
+.link {
+    color: var(--mantine-color-neonCyan-4);
+    text-decoration: underline;
+    word-break: break-word;
+}
+
+.link:hover {
+    color: var(--mantine-color-neonCyan-3);
+}

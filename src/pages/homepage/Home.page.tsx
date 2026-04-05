@@ -4,6 +4,8 @@ import { LandingHeader } from '@/components/landingpage/LandingHeader/LandingHea
 import { ScanlineOverlay } from '@/components/landingpage/ScanlineOverlay/ScanlineOverlay';
 import { SectionCard } from '@/components/landingpage/SectionCard/SectionCard';
 import classes from './Home.page.module.css';
+import { Button } from '@mantine/core';
+import { Link } from 'react-router-dom';
 
 export function HomePage() {
   return (
@@ -11,6 +13,13 @@ export function HomePage() {
       <BackgroundEffectsMagenta />
       <ScanlineOverlay />
       <LandingHeader />
+      <Button
+        component={Link}
+        to="/privacy-policy"
+        color='neonMagenta'
+        variant='subtle' className={classes.privacyButton}>
+        Privacy Policy
+      </Button>
       <main className={classes.main}>
         <HeroSection />
         <div className={classes.grid}>

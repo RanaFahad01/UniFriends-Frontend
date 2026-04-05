@@ -3,6 +3,7 @@ import { AcademicLayout } from './layouts/AcademicLayout';
 import { ActivitiesLayout } from './layouts/ActivitiesLayout';
 import { HomePage } from './pages/homepage/Home.page';
 import LoginSignup from './pages/loginsignup/LoginSignup.page';
+import PrivacyPolicy from './pages/privacypolicy/PrivacyPolicy.page';
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginSignup />,
+  },
+  {
+    path: '/privacy-policy',
+    element: <PrivacyPolicy />,
   },
   {
     path: '/academic',

@@ -7,6 +7,12 @@
   overflow-x: hidden;
 }
 
+.privacyButton {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}
+
 .main {
   position: relative;
   z-index: 1;
