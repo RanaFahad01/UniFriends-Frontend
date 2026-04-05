@@ -13,13 +13,6 @@ export function HomePage() {
       <BackgroundEffectsMagenta />
       <ScanlineOverlay />
       <LandingHeader />
-      <Button
-        component={Link}
-        to="/privacy-policy"
-        color='neonMagenta'
-        variant='subtle' className={classes.privacyButton}>
-        Privacy Policy
-      </Button>
       <main className={classes.main}>
         <HeroSection />
         <div className={classes.grid}>
@@ -40,7 +33,17 @@ export function HomePage() {
             ]}
           />
         </div>
+
       </main>
+      {/* Privacy policy button */}
+      <Button
+        component={Link}
+        to="/privacy-policy"
+        color='neonMagenta'
+        variant='subtle' className={classes.privacyButton}>
+        Privacy Policy
+      </Button>
     </div>
+
   );
 }

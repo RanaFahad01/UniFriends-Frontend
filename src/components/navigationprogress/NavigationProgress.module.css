@@ -1,0 +1,16 @@
+.container {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.bar {
+    background: var(--mantine-color-neonCyan-4);
+    height: 3px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 0 10px var(--mantine-color-neonCyan-4), 0 0 5px var(--mantine-color-neonCyan-6);
+}

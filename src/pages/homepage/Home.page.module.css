@@ -7,10 +7,21 @@
   overflow-x: hidden;
 }
 
-.privacyButton {
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
+/* Privacy policy button is top left on desktop and bottom center on mobile */
+@media (min-width: $mantine-breakpoint-sm) {
+  .privacyButton {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+  }
+}
+
+@media (max-width: $mantine-breakpoint-sm) {
+  .privacyButton {
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 1rem;
+  }
 }
 
 .main {
