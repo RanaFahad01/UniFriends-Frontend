@@ -7,7 +7,7 @@
   overflow-x: hidden;
 }
 
-/* Privacy policy button is top left on desktop and bottom center on mobile */
+/* Privacy policy button is top left on desktop and bottom left on mobile */
 @media (min-width: $mantine-breakpoint-sm) {
   .privacyButton {
     position: absolute;
@@ -18,9 +18,7 @@
 
 @media (max-width: $mantine-breakpoint-sm) {
   .privacyButton {
-    left: 50%;
-    transform: translateX(-50%);
-    padding-bottom: 1rem;
+    margin-bottom: 1rem;
   }
 }
 
