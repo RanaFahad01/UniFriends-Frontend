@@ -9,12 +9,12 @@ interface PostsProps {
 
 export default function Posts({ mode }: PostsProps) {
     const posts = dummyPosts.filter((p) => p.mode === mode); // This filtering will be done database side in the future
-    const heading = mode === 'academic' ? 'Academic Feed' : 'Activities Feed';
+    const heading = mode === 'academic' ? 'Academic Feed' : 'Extracurriculars Feed';
 
     return (
         <Box className={classes.page}>
             <Box className={classes.container}>
-                <Title order={2} className={classes.heading}>
+                <Title order={2} className={classes.heading} c={mode === 'academic' ? 'neonCyan.6' : 'neonMagenta.3'}>
                     {heading}
                 </Title>
                 <Stack gap="sm">
