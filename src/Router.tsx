@@ -5,6 +5,7 @@ import { RootLayout } from './layouts/RootLayout';
 import { HomePage } from './pages/homepage/Home.page';
 import LoginSignup from './pages/loginsignup/LoginSignup.page';
 import PrivacyPolicy from './pages/privacypolicy/PrivacyPolicy.page';
+import Posts from './pages/posts/Posts.page';
 
 const router = createBrowserRouter([
   {
@@ -24,14 +25,18 @@ const router = createBrowserRouter([
         element: <PrivacyPolicy />,
       },
       {
-        path: '/academic',
+        path: '/academics',
         element: <AcademicLayout />,
-        children: [],
+        children: [
+          { path: 'posts', element: <Posts mode="academic" /> },
+        ],
       },
       {
-        path: '/activities',
+        path: '/extracurriculars',
         element: <ActivitiesLayout />,
-        children: [],
+        children: [
+          { path: 'posts', element: <Posts mode="extracurricular" /> },
+        ],
       },
     ],
   },

@@ -40,7 +40,8 @@ export function HomePage() {
         component={Link}
         to="/privacy-policy"
         color='neonMagenta'
-        variant='subtle' className={classes.privacyButton}>
+        variant='subtle'
+        className={classes.privacyButton}>
         Privacy Policy
       </Button>
     </div>

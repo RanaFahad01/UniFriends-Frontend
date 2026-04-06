@@ -8,6 +8,12 @@
 }
 
 /* Privacy policy button is top left on desktop and bottom left on mobile */
+.privacyButton {
+  /* Ensure the button is above the hero section on smaller desktop screens */
+  z-index: 10;
+}
+
+/* Tablet and desktop styles */
 @media (min-width: $mantine-breakpoint-sm) {
   .privacyButton {
     position: absolute;
@@ -16,9 +22,11 @@
   }
 }
 
+/* Mobile styles */
 @media (max-width: $mantine-breakpoint-sm) {
   .privacyButton {
     margin-bottom: 1rem;
+    margin-left: 0.5rem;
   }
 }
 
