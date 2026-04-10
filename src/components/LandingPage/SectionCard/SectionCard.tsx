@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom';
 import { Box, Text, Title } from '@mantine/core';
 import classes from './SectionCard.module.css';
-import { Link } from 'react-router-dom';
 
 interface SectionCardProps {
   variant: 'academics' | 'extracurriculars';
@@ -10,7 +10,7 @@ interface SectionCardProps {
 
 export function SectionCard({ variant, title, descriptions }: SectionCardProps) {
   return (
-    <Link to={`/${variant}/posts`} style={{ textDecoration: 'none' }}>
+    <Link to={`/${variant}/posts`} style={{ textDecoration: 'none', display: 'contents' }}>
       <Box className={classes.card} data-variant={variant}>
         <Title order={3} className={classes.heading}>
           {title}

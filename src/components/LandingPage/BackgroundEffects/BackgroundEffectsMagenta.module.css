@@ -11,7 +11,7 @@
   left: 0;
   width: 100%;
   height: 50%;
-  background: linear-gradient(to top, rgba(181, 124, 255, 0.1), transparent);
+  background: linear-gradient(to top, rgba(181, 124, 255, 0.175), transparent);
 }
 
 .vignette {

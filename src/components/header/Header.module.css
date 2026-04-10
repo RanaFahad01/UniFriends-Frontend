@@ -1,79 +1,79 @@
 .header {
-    height: 56px;
-    /* margin-bottom: 120px; */
-    background-color: var(--mantine-color-body);
-    border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  height: 56px;
+  /* margin-bottom: 120px; */
+  background-color: var(--mantine-color-body);
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
 
 .inner {
-    height: 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  height: 56px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .link,
 .subLink,
 .subMenuItem {
-    font-family: 'Rajdhani', sans-serif;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .link {
-    display: block;
-    line-height: 1;
-    padding: 8px 12px;
-    border-radius: var(--mantine-radius-sm);
-    text-decoration: none;
-    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
-    font-size: var(--mantine-font-size-xl);
-    font-weight: 700;
+  display: block;
+  line-height: 1;
+  padding: 8px 12px;
+  border-radius: var(--mantine-radius-sm);
+  text-decoration: none;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+  font-size: var(--mantine-font-size-xl);
+  font-weight: 700;
 
-    @media (max-width: $mantine-breakpoint-sm) {
-        border-radius: 0;
-        padding: var(--mantine-spacing-md);
-        width: 100%;
-    }
+  @media (max-width: $mantine-breakpoint-sm) {
+    border-radius: 0;
+    padding: var(--mantine-spacing-md);
+    width: 100%;
+  }
 
-    @mixin hover {
-        background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
-    }
+  @mixin hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  }
 }
 
 .subLink {
-    display: block;
-    text-decoration: none;
-    padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
-    padding-left: calc(var(--mantine-spacing-md) * 2);
-    font-size: var(--mantine-font-size-md);
-    font-style: italic;
-    /* color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0)); */
+  display: block;
+  text-decoration: none;
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+  padding-left: calc(var(--mantine-spacing-md) * 2);
+  font-size: var(--mantine-font-size-md);
+  font-style: italic;
+  /* color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0)); */
 
-    @mixin hover {
-        background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
-    }
+  @mixin hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  }
 }
 
 .subMenuItem,
 .subLink {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .subMenuItem {
-    font-size: var(--mantine-font-size-lg);
+  font-size: var(--mantine-font-size-lg);
 }
 
 .linkLabel {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .academics {
-    color: var(--mantine-color-neonCyan-3);
+  color: var(--mantine-color-neonCyan-3);
 }
 
 .extracurriculars {
-    color: var(--mantine-color-neonMagenta-3)
+  color: var(--mantine-color-neonMagenta-3);
 }
 
 .leagues {
-    color: var(--mantine-color-neonGold-3)
+  color: var(--mantine-color-neonGold-3);
 }
