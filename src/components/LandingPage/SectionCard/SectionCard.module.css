@@ -2,7 +2,9 @@
   background: #1a1919;
   /* padding: 3rem; */
   padding: 2rem;
-  transition: background-color, transform 500ms ease;
+  transition:
+    background-color,
+    transform 500ms ease;
   cursor: pointer;
 
   &:hover {
@@ -14,7 +16,7 @@
   padding-right: 3rem;
 }
 
-.card[data-variant='extracurriculars'] {
+.card[data-variant='activities'] {
   padding-left: 3rem;
 }
 
@@ -27,7 +29,7 @@
     padding-right: 5rem;
   }
 
-  .card[data-variant='extracurriculars'] {
+  .card[data-variant='activities'] {
     padding-left: 5rem;
   }
 }
@@ -41,7 +43,7 @@
     padding-right: 7rem;
   }
 
-  .card[data-variant='extracurriculars'] {
+  .card[data-variant='activities'] {
     padding-left: 7rem;
   }
 }
@@ -56,19 +58,19 @@
   background: rgba(0, 238, 252, 0.05);
 }
 
-/* Extracurriculars variant */
-.card[data-variant='extracurriculars'] {
+/* activities variant */
+.card[data-variant='activities'] {
   clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 95%);
   border-right: 8px solid var(--mantine-color-neonMagenta-3);
   text-align: right;
 }
 
-.card[data-variant='extracurriculars']:hover {
+.card[data-variant='activities']:hover {
   background: rgba(180, 124, 255, 0.05);
 }
 
 @media (min-width: $mantine-breakpoint-md) {
-  .card[data-variant='extracurriculars'] {
+  .card[data-variant='activities'] {
     margin-top: 2rem;
   }
 }
@@ -86,7 +88,7 @@
   color: var(--mantine-color-neonCyan-6);
 }
 
-.card[data-variant='extracurriculars'] .heading {
+.card[data-variant='activities'] .heading {
   color: var(--mantine-color-neonMagenta-3);
 }
 
@@ -102,7 +104,7 @@
   }
 }
 
-.description+.description {
+.description + .description {
   margin-top: 0.75rem;
 }
 
@@ -117,7 +119,7 @@
   background: var(--mantine-color-neonCyan-6);
 }
 
-.card[data-variant='extracurriculars'] .accent {
+.card[data-variant='activities'] .accent {
   background: var(--mantine-color-neonMagenta-3);
   margin-left: auto;
 }

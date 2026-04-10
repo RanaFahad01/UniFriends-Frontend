@@ -117,7 +117,7 @@ export function Header() {
           <Link to="/" style={{ display: 'contents' }}>
             <Logo />
           </Link>
-          <Group gap={5} visibleFrom="sm">
+          <Group gap={5} visibleFrom="sm" justify="space-between">
             {items}
             <UserControls />
           </Group>
@@ -142,20 +142,23 @@ export function Header() {
       >
         <ScrollArea h="calc(100vh - 80px" mx="-md">
           <Divider my="sm" />
+          <UserControls withinPortal={false} menuPosition="bottom-start" />
+          <Divider my="sm" />
           {links.map((link) => {
             if (link.links) {
               return <DrawerLinksGroup key={link.label} link={link} />;
             }
 
             return (
-              <a
+              <NavLink
                 key={link.label}
-                href={link.link}
+                to={link.link}
                 className={classes.link}
+                style={{ display: 'contents' }}
                 onClick={(event) => event.preventDefault()}
               >
                 {link.label}
-              </a>
+              </NavLink>
             );
           })}
         </ScrollArea>
@@ -199,7 +202,6 @@ function DrawerLinksGroup({
                 link.label === 'Extracurriculars' && classes.extracurriculars,
                 link.label === 'Leagues' && classes.leagues
               )}
-              onClick={(event) => event.preventDefault()}
             >
               {subLink.label}
             </NavLink>

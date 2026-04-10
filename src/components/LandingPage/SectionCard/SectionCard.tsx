@@ -3,7 +3,7 @@ import { Box, Text, Title } from '@mantine/core';
 import classes from './SectionCard.module.css';
 
 interface SectionCardProps {
-  variant: 'academics' | 'extracurriculars';
+  variant: 'academics' | 'activities';
   title: string;
   descriptions: string[];
 }

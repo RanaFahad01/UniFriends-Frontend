@@ -1,11 +1,11 @@
+import { Link } from 'react-router-dom';
+import { Button } from '@mantine/core';
 import { BackgroundEffectsMagenta } from '@/components/landingpage/BackgroundEffects/BackgroundEffectsMagenta';
 import { HeroSection } from '@/components/landingpage/HeroSection/HeroSection';
 import { LandingHeader } from '@/components/landingpage/LandingHeader/LandingHeader';
 import { ScanlineOverlay } from '@/components/landingpage/ScanlineOverlay/ScanlineOverlay';
 import { SectionCard } from '@/components/landingpage/SectionCard/SectionCard';
 import classes from './Home.page.module.css';
-import { Button } from '@mantine/core';
-import { Link } from 'react-router-dom';
 
 export function HomePage() {
   return (
@@ -25,7 +25,7 @@ export function HomePage() {
             ]}
           />
           <SectionCard
-            variant="extracurriculars"
+            variant="activities"
             title="Extracurriculars"
             descriptions={[
               'Find people for activities like gaming, sports, hobbies, etc.',
@@ -33,18 +33,17 @@ export function HomePage() {
             ]}
           />
         </div>
-
       </main>
       {/* Privacy policy button */}
       <Button
         component={Link}
         to="/privacy-policy"
-        color='neonMagenta'
-        variant='subtle'
-        className={classes.privacyButton}>
+        color="neonMagenta"
+        variant="subtle"
+        className={classes.privacyButton}
+      >
         Privacy Policy
       </Button>
     </div>
-
   );
 }
