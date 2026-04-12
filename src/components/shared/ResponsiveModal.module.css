@@ -1,0 +1,10 @@
+.content {
+  background-color: var(--mantine-color-dark-7);
+  border: 1px solid var(--mantine-color-dark-4);
+  border-radius: var(--mantine-radius-md);
+}
+
+.body {
+  padding: var(--mantine-spacing-xl);
+  padding-top: 0;
+}

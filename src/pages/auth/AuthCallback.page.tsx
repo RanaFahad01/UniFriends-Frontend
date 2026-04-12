@@ -18,10 +18,18 @@ export default function AuthCallback() {
       return;
     }
 
-    if (user.isNewUser) {
-      navigate('/onboarding', { replace: true });
+    const destination = user.isNewUser ? '/onboarding' : '/academics/posts';
+
+    // Preload the avatar image before navigating so the browser has it cached
+    // by the time UserControls mounts. Without this, Avatar shows the fallback
+    // placeholder on first login because the image hasn't been fetched yet.
+    if (user.avatarUrl) {
+      const img = new Image();
+      img.onload = () => navigate(destination, { replace: true });
+      img.onerror = () => navigate(destination, { replace: true });
+      img.src = user.avatarUrl;
     } else {
-      navigate('/academics/posts', { replace: true });
+      navigate(destination, { replace: true });
     }
   }, [isLoading, user, navigate]);
 

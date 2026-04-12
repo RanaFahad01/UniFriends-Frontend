@@ -1,0 +1,91 @@
+.page {
+    min-height: 100vh;
+    background: #0e0e0e;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem 3rem;
+}
+
+.card {
+    background: #1a1919;
+    border-left: 6px solid var(--mantine-color-neonCyan-6);
+    padding: 1.75rem 1.25rem;
+    width: 100%;
+    max-width: 34rem;
+}
+
+@media (min-width: $mantine-breakpoint-xs) {
+    .card {
+        padding: 2rem 1.75rem;
+        max-width: 36rem;
+    }
+}
+
+@media (min-width: $mantine-breakpoint-md) {
+    .card {
+        padding: 3rem 2.5rem;
+        max-width: 42rem;
+    }
+}
+
+.heading {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--mantine-color-neonCyan-3);
+    line-height: 1.1;
+    margin: 0 0 0.75rem 0;
+}
+
+.accent {
+    height: 3px;
+    width: 60%;
+    background: var(--mantine-color-neonCyan-6);
+    opacity: 0.4;
+    margin-bottom: 2rem;
+}
+
+.sectionTitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0;
+}
+
+.sectionTitleCyan {
+    color: var(--mantine-color-neonCyan-5);
+}
+
+.sectionTitleMagenta {
+    color: var(--mantine-color-neonMagenta-3);
+}
+
+.submitButton {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: var(--mantine-font-size-lg);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.usernameInput {
+    flex: 1;
+    min-width: 0;
+}

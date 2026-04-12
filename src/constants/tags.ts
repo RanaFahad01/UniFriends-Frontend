@@ -1,0 +1,48 @@
+// Tag options for post creation.
+// values must match the backend pattern: ^[a-z0-9-]+$ (lowercase, numbers, hyphens only)
+
+export const ACADEMIC_TAGS = [
+  { value: 'generalStudy', label: 'General Study' },
+  { value: 'examGrind', label: 'Exam Grind' },
+  { value: 'programming', label: 'Programming' },
+  { value: 'hackathons', label: 'Hackathons' },
+  { value: 'frontendDev', label: 'Frontend Dev' },
+  { value: 'backendDev', label: 'Backend Dev' },
+  { value: 'aiMl', label: 'AI/ML' },
+  { value: 'dataAnalysis', label: 'Data Analysis' },
+  { value: 'jobGrind', label: 'Job Grind' },
+  { value: 'projectsGrind', label: 'Projects Grind' },
+  { value: 'conferences', label: 'Conferences' },
+  { value: 'thesisWork', label: 'Thesis Work' },
+  { value: 'researchWork', label: 'Research Work' },
+  { value: 'hlpl1', label: 'HLPL1' },
+  { value: 'hlpl2', label: 'HLPL2' },
+  { value: 'sweSubject', label: 'SWE Subject' },
+  { value: 'languageStudy', label: 'Language Study' },
+  { value: 'engineering', label: 'Engineering' },
+  { value: 'onlineStudying', label: 'Online Studying' },
+  { value: 'notesMaking', label: 'Notes Making' },
+];
+
+export const ACTIVITY_TAGS = [
+  { value: 'sports', label: 'Sports' },
+  { value: 'football', label: 'Football' },
+  { value: 'basketball', label: 'Basketball' },
+  { value: 'gaming', label: 'Gaming' },
+  { value: 'fortnite', label: 'Fortnite' },
+  { value: 'amongUs', label: 'Among Us' },
+  { value: 'lethalCompany', label: 'Lethal Company' },
+  { value: 'skribblIo', label: 'Skribbl.io' },
+  { value: 'competitiveGaming', label: 'Competitive Gaming' },
+  { value: 'rankedGrind', label: 'Ranked Grind' },
+  { value: 'hangouts', label: 'Hangouts' },
+  { value: 'studentLife', label: 'Student Life' },
+  { value: 'cricket', label: 'Cricket' },
+  { value: 'workingOut', label: 'Working Out' },
+  { value: 'music', label: 'Music' },
+  { value: 'instruments', label: 'Instruments' },
+  { value: 'boardGames', label: 'Board Games' },
+  { value: 'chess', label: 'Chess' },
+  { value: 'travel', label: 'Travel' },
+  { value: 'cooking', label: 'Cooking' },
+];

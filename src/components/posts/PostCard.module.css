@@ -1,38 +1,44 @@
 .card {
-    background: var(--mantine-color-dark-8);
-    border: 1px solid var(--mantine-color-dark-5);
-    cursor: pointer;
-    transition: border-color 150ms ease, box-shadow 150ms ease;
+  background: var(--mantine-color-dark-8);
+  border: 1px solid var(--mantine-color-dark-5);
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+
+  user-select: none; /* Prevent text selection on click, since the whole card is clickable */
 }
 
-.card.academic:hover {
-    border-color: var(--mantine-color-neonCyan-7);
-    box-shadow: 0 0 0 1px var(--mantine-color-neonCyan-8),
-        0 0 16px rgba(0, 210, 230, 0.07);
+.card.academics:hover {
+  border-color: var(--mantine-color-neonCyan-7);
+  box-shadow:
+    0 0 0 1px var(--mantine-color-neonCyan-8),
+    0 0 16px rgba(0, 210, 230, 0.07);
 }
 
-.card.extracurricular:hover {
-    border-color: var(--mantine-color-neonMagenta-7);
-    box-shadow: 0 0 0 1px var(--mantine-color-neonMagenta-8),
-        0 0 16px rgba(180, 0, 230, 0.07);
+.card.activities:hover {
+  border-color: var(--mantine-color-neonMagenta-7);
+  box-shadow:
+    0 0 0 1px var(--mantine-color-neonMagenta-8),
+    0 0 16px rgba(180, 0, 230, 0.07);
 }
 
 /* Flex child needs min-width: 0 to allow text-overflow to work */
 .content {
-    flex: 1;
-    min-width: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .title {
-    line-height: 1.3;
-    /* Clamp to one line on very small screens */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  line-height: 1.3;
+  /* Clamp to one line on very small screens */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @media (min-width: $mantine-breakpoint-sm) {
-    .title {
-        white-space: normal;
-    }
+  .title {
+    white-space: normal;
+  }
 }

@@ -1,0 +1,27 @@
+.card {
+  border: 1px solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+}
+
+.cardTitle[data-variant='ACADEMIC'] {
+  color: var(--mantine-color-neonCyan-2);
+  &::after {
+    content: '';
+    display: block;
+    background-color: var(--mantine-color-neonCyan-6);
+    width: 45px;
+    height: 2px;
+    margin-top: var(--mantine-spacing-sm);
+  }
+}
+
+.cardTitle[data-variant='HOMIES'] {
+  color: var(--mantine-color-neonMagenta-2);
+  &::after {
+    content: '';
+    display: block;
+    background-color: var(--mantine-color-neonMagenta-3);
+    width: 45px;
+    height: 2px;
+    margin-top: var(--mantine-spacing-sm);
+  }
+}

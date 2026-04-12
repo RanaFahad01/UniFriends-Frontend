@@ -29,7 +29,7 @@ export function ProtectedRoute({ requiredRole }: Props) {
     return <Navigate to="/onboarding" replace />;
   }
 
-  // ADMIN passes any role check — they have all permissions.
+  // ADMIN passes any role check - they have all permissions.
   if (requiredRole && user.role !== requiredRole && user.role !== 'ADMIN') {
     return <Navigate to="/" replace />;
   }

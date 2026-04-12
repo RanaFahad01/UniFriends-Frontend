@@ -17,7 +17,6 @@
     font-size: clamp(1.4rem, 3vw, 1.9rem);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin-bottom: 1rem;
 }
 
 @media (min-width: $mantine-breakpoint-sm) {
