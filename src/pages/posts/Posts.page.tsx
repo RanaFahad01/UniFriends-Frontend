@@ -44,7 +44,10 @@ export default function Posts({ mode }: PostsProps) {
     queryFn: ({ pageParam }) =>
       apiFetch<Page<Post>>(`/api/posts?type=${apiType}&page=${pageParam}`),
     initialPageParam: 0,
-    getNextPageParam: (lastPage) => (lastPage.last ? undefined : lastPage.number + 1),
+    getNextPageParam: (lastPage) =>
+      lastPage.page.number >= lastPage.page.totalPages - 1
+        ? undefined
+        : lastPage.page.number + 1,
   });
 
   const posts = data?.pages.flatMap((page) => page.content) ?? [];
