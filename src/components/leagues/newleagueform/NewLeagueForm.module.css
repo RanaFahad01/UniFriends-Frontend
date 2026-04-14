@@ -1,0 +1,55 @@
+.heading {
+  font-family: var(--mantine-font-family-headings);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--mantine-spacing-xs);
+}
+
+.cyan {
+  color: var(--mantine-color-neonCyan-6);
+}
+
+.magenta {
+  color: var(--mantine-color-neonMagenta-3);
+}
+
+.submitButton {
+  font-family: var(--mantine-font-family-headings);
+  font-size: var(--mantine-font-size-lg);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-top: var(--mantine-spacing-xs);
+}
+
+.mascotItem {
+  cursor: pointer;
+  border-radius: var(--mantine-radius-md);
+  border: 2px solid var(--mantine-color-dark-4);
+  padding: 6px;
+  opacity: 0.55;
+  transition:
+    filter 150ms ease,
+    border-color 150ms ease,
+    opacity 150ms ease;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mascotItem:hover {
+  opacity: 0.85;
+}
+
+.mascotItem[data-selected='true'][data-variant='ACADEMIC'] {
+  border-color: var(--mantine-color-neonCyan-6);
+  opacity: 1;
+  filter: drop-shadow(0 0 6px var(--mantine-color-neonCyan-6));
+}
+
+.mascotItem[data-selected='true'][data-variant='HOMIES'] {
+  border-color: var(--mantine-color-neonMagenta-3);
+  opacity: 1;
+  filter: drop-shadow(0 0 6px var(--mantine-color-neonMagenta-3));
+}

@@ -14,6 +14,7 @@ import {
   UnstyledButton,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { useAuth } from '@/store/AuthContext';
 import Logo from './logo/Logo';
 import UserControls from './usercontrols/UserControls';
 import classes from './Header.module.css';
@@ -48,6 +49,9 @@ const links = [
 
 export function Header() {
   const [opened, { toggle, close }] = useDisclosure(false);
+  const { user, isLoading } = useAuth();
+  const showUserControls = !!user && !user.isNewUser;
+  const showLoginButton = !isLoading && !showUserControls;
 
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
@@ -119,7 +123,12 @@ export function Header() {
           </Link>
           <Group gap={5} visibleFrom="sm" justify="space-between">
             {items}
-            <UserControls />
+            {showUserControls && <UserControls />}
+            {showLoginButton && (
+              <NavLink to="/login" className={classes.loginButton}>
+                Log In / Sign Up
+              </NavLink>
+            )}
           </Group>
           <Burger
             opened={opened}
@@ -142,7 +151,12 @@ export function Header() {
       >
         <ScrollArea h="calc(100vh - 80px" mx="-md">
           <Divider my="sm" />
-          <UserControls withinPortal={false} menuPosition="bottom-start" />
+          {showUserControls && <UserControls withinPortal={false} menuPosition="bottom-start" />}
+          {showLoginButton && (
+            <NavLink to="/login" className={classes.loginButton} style={{ margin: '0.5rem 1rem' }}>
+              Log In / Sign Up
+            </NavLink>
+          )}
           <Divider my="sm" />
           {links.map((link) => {
             if (link.links) {
@@ -191,7 +205,6 @@ function DrawerLinksGroup({
       </UnstyledButton>
       <Collapse in={opened}>
         {link.links?.map((subLink) => {
-          console.log(link.label, subLink.label);
           return (
             <NavLink
               key={subLink.link}

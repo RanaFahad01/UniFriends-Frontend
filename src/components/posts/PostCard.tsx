@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { Avatar, Badge, Box, Card, Group, Text } from '@mantine/core';
-import type { Post } from '@/pages/posts/dummyPosts';
+import type { Post } from '@/types/post';
+import { formatDate } from '@/utils/formatDate';
 import classes from './PostCard.module.css';
 
 interface PostCardProps {
@@ -15,17 +16,17 @@ export function PostCard({ post, variant, onClick }: PostCardProps) {
   return (
     <Card className={clsx(classes.card, classes[variant])} padding="md" radius="sm" onClick={onClick}>
       <Group gap="sm" wrap="nowrap" align="flex-start">
-        <Avatar radius="xl" size="md" alt={post.username} />
+        <Avatar src={post.authorAvatarUrl} radius="xl" size="md" alt={post.authorUsername ?? 'User'} />
         <Box className={classes.content}>
           <Group gap={6} align="center">
             <Text size="sm" fw={600}>
-              {post.username}
+              {post.authorUsername ?? 'Unknown'}
             </Text>
             <Text size="xs" c="dimmed">
               &middot;
             </Text>
             <Text size="xs" c="dimmed">
-              {post.timestamp}
+              {formatDate(post.createdAt)}
             </Text>
             <Group gap={4}>
               {post.tags &&
@@ -40,7 +41,7 @@ export function PostCard({ post, variant, onClick }: PostCardProps) {
             {post.title}
           </Text>
           <Text size="sm" c="dimmed" mt={4} lineClamp={2}>
-            {post.body}
+            {post.content}
           </Text>
         </Box>
       </Group>

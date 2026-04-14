@@ -1,0 +1,44 @@
+.page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 1.5rem 1rem 4rem;
+}
+
+.container {
+  max-width: 40rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.tagsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: $mantine-breakpoint-sm) {
+  .page {
+    padding: 2rem 2rem 4rem;
+  }
+
+  .actionButtons {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,90 @@
+.page {
+  min-height: 100vh;
+  background: #0e0e0e;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1rem 3rem;
+}
+
+.card {
+  padding: 1.75rem 1.25rem;
+  width: 100%;
+  max-width: 34rem;
+  background: #1a1919;
+}
+
+.cardCyan {
+  border-left: 6px solid var(--mantine-color-neonCyan-6);
+}
+
+.cardMagenta {
+  border-left: 6px solid var(--mantine-color-neonMagenta-3);
+}
+
+@media (min-width: $mantine-breakpoint-xs) {
+  .card {
+    padding: 2rem 1.75rem;
+    max-width: 36rem;
+  }
+}
+
+@media (min-width: $mantine-breakpoint-md) {
+  .card {
+    padding: 3rem 2.5rem;
+    max-width: 42rem;
+  }
+}
+
+.heading {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  margin: 0 0 0.75rem 0;
+}
+
+.headingCyan {
+  color: var(--mantine-color-neonCyan-3);
+}
+
+.headingMagenta {
+  color: var(--mantine-color-neonMagenta-3);
+}
+
+.accent {
+  height: 3px;
+  width: 60%;
+  opacity: 0.4;
+  margin-bottom: 2rem;
+}
+
+.accentCyan {
+  background: var(--mantine-color-neonCyan-6);
+}
+
+.accentMagenta {
+  background: var(--mantine-color-neonMagenta-3);
+}
+
+.submitButton {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: var(--mantine-font-size-lg);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

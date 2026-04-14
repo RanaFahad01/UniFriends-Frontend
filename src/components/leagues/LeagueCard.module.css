@@ -1,5 +1,16 @@
 .card {
   border: 1px solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+  user-select: none;
+  cursor: pointer;
+}
+
+.card[data-variant='ACADEMIC']:hover {
+  box-shadow: 0 0 8px var(--mantine-color-neonCyan-6);
+  transform: scale(1.05);
+}
+.card[data-variant='HOMIES']:hover {
+  box-shadow: 0 0 8px var(--mantine-color-neonMagenta-3);
+  transform: scale(1.05);
 }
 
 .cardTitle[data-variant='ACADEMIC'] {
@@ -24,4 +35,20 @@
     height: 2px;
     margin-top: var(--mantine-spacing-sm);
   }
+}
+
+.avatar {
+  overflow: visible;
+  background-color: transparent;
+}
+
+/* target the real <img> inside Mantine Avatar */
+.avatar[data-variant='ACADEMIC'] :global(img) {
+  overflow: visible;
+  filter: drop-shadow(0 0 5px var(--mantine-color-neonCyan-6));
+}
+
+.avatar[data-variant='HOMIES'] :global(img) {
+  overflow: visible;
+  filter: drop-shadow(0 0 5px var(--mantine-color-neonMagenta-3));
 }

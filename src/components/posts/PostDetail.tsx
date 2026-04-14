@@ -1,5 +1,6 @@
 import { Avatar, Badge, Box, Divider, Group, ScrollArea, Text, Title } from '@mantine/core';
-import type { Post } from '@/pages/posts/dummyPosts';
+import type { Post } from '@/types/post';
+import { formatDate } from '@/utils/formatDate';
 
 interface PostDetailProps {
   post: Post;
@@ -12,13 +13,13 @@ export function PostDetail({ post, variant }: PostDetailProps) {
   return (
     <Box>
       <Group gap="sm" wrap="nowrap" align="center" mb="xs">
-        <Avatar radius="xl" size="md" alt={post.username} />
+        <Avatar src={post.authorAvatarUrl} radius="xl" size="md" alt={post.authorUsername ?? 'User'} />
         <Box>
           <Text size="sm" fw={600}>
-            {post.username}
+            {post.authorUsername ?? 'Unknown'}
           </Text>
           <Text size="xs" c="dimmed">
-            {post.timestamp}
+            {formatDate(post.createdAt)}
           </Text>
         </Box>
       </Group>
@@ -41,7 +42,7 @@ export function PostDetail({ post, variant }: PostDetailProps) {
 
       <ScrollArea.Autosize mah="50vh">
         <Text size="sm" style={{ whiteSpace: 'pre-wrap', lineHeight: 1.7 }}>
-          {post.body}
+          {post.content}
         </Text>
       </ScrollArea.Autosize>
     </Box>

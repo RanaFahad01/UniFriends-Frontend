@@ -11,6 +11,9 @@ import LoginSignup from './pages/loginsignup/LoginSignup.page';
 import Onboarding from './pages/onboarding/Onboarding.page';
 import Posts from './pages/posts/Posts.page';
 import PrivacyPolicy from './pages/privacypolicy/PrivacyPolicy.page';
+import UserProfile from './pages/profile/UserProfile.page';
+import PersonalityProfileSettings from './pages/settings/PersonalityProfile.page';
+import StudentProfileSettings from './pages/settings/StudentProfile.page';
 
 const LeaguesPage = lazy(() => import('./pages/leagues/Leagues.page'));
 
@@ -37,6 +40,7 @@ const router = createBrowserRouter([
               </Suspense>
             ),
           },
+          { path: 'profile/:userId', element: <UserProfile type="STUDENT" /> },
         ],
       },
       {
@@ -52,13 +56,17 @@ const router = createBrowserRouter([
               </Suspense>
             ),
           },
+          { path: 'profile/:userId', element: <UserProfile type="HOMIES" /> },
         ],
       },
 
       // Protected routes
       {
         element: <ProtectedRoute />,
-        children: [],
+        children: [
+          { path: '/settings/student-profile', element: <StudentProfileSettings /> },
+          { path: '/settings/personality-profile', element: <PersonalityProfileSettings /> },
+        ],
       },
 
       // Admin-only routes

@@ -1,6 +1,6 @@
 .header {
   height: 56px;
-  /* margin-bottom: 120px; */
+  margin-bottom: var(--mantine-spacing-xl);
   background-color: var(--mantine-color-body);
   border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
@@ -76,4 +76,30 @@
 
 .leagues {
   color: var(--mantine-color-neonGold-3);
+}
+
+.loginButton {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mantine-color-neonCyan-6);
+  background: transparent;
+  border: 2px solid var(--mantine-color-neonCyan-6);
+  padding: 0 1.25rem;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 200ms ease;
+  white-space: nowrap;
+  text-decoration: none;
+
+  margin-left: var(--mantine-spacing-md);
+
+  @mixin hover {
+    background: rgba(0, 238, 252, 0.08);
+  }
 }

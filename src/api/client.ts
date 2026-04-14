@@ -15,7 +15,10 @@ export async function apiFetch<T = void>(path: string, init?: RequestInit): Prom
   });
 
   if (!res.ok) {
-    const err: ApiError = await res.json();
+    const errText = await res.text();
+    const err: ApiError = errText
+      ? (JSON.parse(errText) as ApiError)
+      : { status: res.status, error: res.statusText, message: 'An unexpected error occurred.' };
     throw err;
   }
 
