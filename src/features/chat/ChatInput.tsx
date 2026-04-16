@@ -41,7 +41,7 @@ export function ChatInput({ mode, onSend }: ChatInputProps) {
             variant="subtle"
             className={classes.sendButton}
             data-variant={mode}
-            data-disabled={!value.trim() ? 'true' : 'false'}
+            data-disabled={!value.trim()}
             disabled={!value.trim()}
             onClick={handleSend}
             aria-label="Send message"

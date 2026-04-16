@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@mantine/core';
-import { BackgroundEffectsLandingPage } from '@/components/landingpage/BackgroundEffects/BackgroundEffectsLandingPage';
 import { BackgroundEffectsMagenta } from '@/components/landingpage/BackgroundEffects/BackgroundEffectsMagenta';
 import { HeroSection } from '@/components/landingpage/HeroSection/HeroSection';
 import { LandingHeader } from '@/components/landingpage/LandingHeader/LandingHeader';
