@@ -11,11 +11,11 @@
   left: 0;
   width: 100%;
   height: 50%;
-  background: linear-gradient(to top, rgba(82, 54, 119, 0.5), transparent);
+  background: linear-gradient(to top, rgba(114, 9, 255, 0.1), transparent);
 }
 
 .vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
 }

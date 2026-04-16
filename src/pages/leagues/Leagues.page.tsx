@@ -162,7 +162,7 @@ export default function Leagues({ mode }: LeaguesProps) {
         <NewLeagueForm mode={mode} mascots={mascots} onSuccess={handleLeagueCreated} />
       </ResponsiveModal>
 
-      <ResponsiveModal opened={detailOpened} onClose={closeDetail}>
+      <ResponsiveModal opened={detailOpened} onClose={closeDetail} size="xl">
         {selectedLeague && (
           <LeagueDetail
             league={selectedLeague}

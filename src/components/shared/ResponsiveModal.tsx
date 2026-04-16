@@ -7,11 +7,12 @@ interface ResponsiveModalProps {
   opened: boolean;
   onClose: () => void;
   children: ReactNode;
+  size?: string;
 }
 
 // Reusable modal shell, it goes full-screen on mobile but centred on desktop.
 // Used for new post, new league, etc. Inner content supplies its own title.
-export function ResponsiveModal({ opened, onClose, children }: ResponsiveModalProps) {
+export function ResponsiveModal({ opened, onClose, children, size = 'lg' }: ResponsiveModalProps) {
   const isMobile = useMediaQuery('(max-width: 50em)');
 
   return (
@@ -19,7 +20,7 @@ export function ResponsiveModal({ opened, onClose, children }: ResponsiveModalPr
       opened={opened}
       onClose={onClose}
       fullScreen={isMobile}
-      size="lg"
+      size={size}
       centered
       overlayProps={{ backgroundOpacity: 0.6, blur: 3 }}
       classNames={{ content: classes.content, body: classes.body }}

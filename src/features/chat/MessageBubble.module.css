@@ -1,0 +1,104 @@
+.row {
+  width: 100%;
+}
+
+.bubbleWrapper {
+  max-width: 72%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bubbleWrapper[data-own='true'] {
+  align-items: flex-end;
+}
+
+.username {
+  font-family: var(--mantine-font-family-headings);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.username[data-variant='ACADEMIC'] {
+  color: var(--mantine-color-neonCyan-4);
+}
+
+.username[data-variant='HOMIES'] {
+  color: var(--mantine-color-neonMagenta-3);
+}
+
+.bubble {
+  background-color: var(--mantine-color-dark-6);
+  border: 1px solid var(--mantine-color-dark-4);
+  border-radius: var(--mantine-radius-md) !important;
+  word-break: break-word;
+}
+
+/* Own messages are neon-tinted background with glow */
+.bubble[data-own='true'][data-variant='ACADEMIC'] {
+  background-color: color-mix(
+    in srgb,
+    var(--mantine-color-neonCyan-6) 12%,
+    var(--mantine-color-dark-7)
+  );
+  border-color: var(--mantine-color-neonCyan-8);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--mantine-color-neonCyan-6) 20%, transparent);
+}
+
+.bubble[data-own='true'][data-variant='HOMIES'] {
+  background-color: color-mix(
+    in srgb,
+    var(--mantine-color-neonMagenta-6) 14%,
+    var(--mantine-color-dark-7)
+  );
+  border-color: var(--mantine-color-neonMagenta-5);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--mantine-color-neonMagenta-3) 20%, transparent);
+}
+
+/* Others' messages are subtle neon border tint */
+.bubble[data-own='false'][data-variant='ACADEMIC'] {
+  border-color: color-mix(
+    in srgb,
+    var(--mantine-color-neonCyan-6) 20%,
+    var(--mantine-color-dark-4)
+  );
+}
+
+.bubble[data-own='false'][data-variant='HOMIES'] {
+  border-color: color-mix(
+    in srgb,
+    var(--mantine-color-neonMagenta-3) 20%,
+    var(--mantine-color-dark-4)
+  );
+}
+
+.content {
+  color: var(--mantine-color-gray-1);
+  line-height: 1.55;
+}
+
+.avatar {
+  font-family: var(--mantine-font-family-headings);
+  font-weight: 700;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.avatar[data-variant='ACADEMIC'] {
+  background-color: color-mix(
+    in srgb,
+    var(--mantine-color-neonCyan-6) 18%,
+    var(--mantine-color-dark-5)
+  );
+  color: var(--mantine-color-neonCyan-3);
+  outline: 1px solid color-mix(in srgb, var(--mantine-color-neonCyan-6) 35%, transparent);
+}
+
+.avatar[data-variant='HOMIES'] {
+  background-color: color-mix(
+    in srgb,
+    var(--mantine-color-neonMagenta-3) 18%,
+    var(--mantine-color-dark-5)
+  );
+  color: var(--mantine-color-neonMagenta-2);
+  outline: 1px solid color-mix(in srgb, var(--mantine-color-neonMagenta-3) 35%, transparent);
+}
