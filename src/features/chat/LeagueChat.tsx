@@ -1,53 +1,140 @@
-import { useEffect, useRef, useState } from 'react';
-import { Box, ScrollArea, Stack, Text } from '@mantine/core';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { Box, Center, Loader, ScrollArea, Stack, Text } from '@mantine/core';
+import { apiFetch } from '@/api/client';
+import { useAuth } from '@/store/AuthContext';
+import type { ChatMessage } from '@/types/chat';
 import { ChatInput } from './ChatInput';
 import { MessageBubble } from './MessageBubble';
-import { academicDummyMessages, homiesDummyMessages } from './dummyMessages';
-import type { DummyChatMessage } from './types';
+import { useMessageHistory } from './useMessageHistory';
+import { useStompChat } from './useStompChat';
 import classes from './LeagueChat.module.css';
 
 interface LeagueChatProps {
+  leagueId: number;
+  leagueName: string;
   mode: 'ACADEMIC' | 'HOMIES';
 }
 
-export function LeagueChat({ mode }: LeagueChatProps) {
-  const initial = mode === 'ACADEMIC' ? academicDummyMessages : homiesDummyMessages;
-  const [messages, setMessages] = useState<DummyChatMessage[]>(initial);
+export function LeagueChat({ leagueId, leagueName, mode }: LeagueChatProps) {
+  const { user } = useAuth();
+  const [realtimeMessages, setRealtimeMessages] = useState<ChatMessage[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
+  // Track message count to detect when older pages are prepended vs new realtime messages
+  const prevMessageCountRef = useRef(0);
 
-  // Scroll to bottom on mount and whenever a new message arrives
+  const { messages, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useMessageHistory(leagueId, true);
+
+  const handleMessage = useCallback((msg: ChatMessage) => {
+    setRealtimeMessages((prev) => {
+      // Dedup: ignore if already in realtime list
+      if (prev.some((m) => m.id === msg.id)) return prev;
+      return [...prev, msg];
+    });
+  }, []);
+
+  const { sendMessage } = useStompChat({ leagueId, enabled: true, onMessage: handleMessage });
+
+  // Deduplicate realtime messages against history (avoids duplicate on reconnect re-fetch)
+  const historyIds = new Set(messages.map((m) => m.id));
+  const filteredRealtime = realtimeMessages.filter((m) => !historyIds.has(m.id));
+  const allMessages = [...messages, ...filteredRealtime];
+
+  // Auto-scroll to bottom when realtime messages arrive (not when loading older history)
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    if (filteredRealtime.length > 0) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [filteredRealtime.length]);
 
-  const handleSend = (content: string) => {
-    setMessages((prev) => [
-      ...prev,
-      { id: Date.now(), username: 'you', content, isOwn: true },
-    ]);
+  // Scroll to bottom on initial load
+  useEffect(() => {
+    if (!isLoading && messages.length > 0 && prevMessageCountRef.current === 0) {
+      bottomRef.current?.scrollIntoView({ behavior: 'instant' });
+    }
+  }, [isLoading, messages.length]);
+
+  // Restore scroll position when older messages are prepended
+  useLayoutEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const prev = prevMessageCountRef.current;
+    const current = allMessages.length;
+    // Only restore if history grew (not realtime)
+    if (current > prev && prev > 0 && filteredRealtime.length === realtimeMessages.length) {
+      const oldScrollHeight = viewport.scrollHeight;
+      // After React has painted the new nodes, shift the scroll position
+      requestAnimationFrame(() => {
+        viewport.scrollTop = viewport.scrollHeight - oldScrollHeight;
+      });
+    }
+    prevMessageCountRef.current = current;
+  }, [allMessages.length, filteredRealtime.length, realtimeMessages.length]);
+
+  // Mark messages as read on mount
+  useEffect(() => {
+    apiFetch(`/api/leagues/${leagueId}/read`, { method: 'POST' }).catch(() => {});
+  }, [leagueId]);
+
+  const handleScrollPositionChange = ({ y }: { x: number; y: number }) => {
+    if (y < 50 && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
   };
 
-  const heading = mode === 'ACADEMIC' ? 'League Chat' : 'Squad Chat';
+  const handleSend = (content: string) => {
+    sendMessage(content);
+    // No optimistic add — server broadcasts back to sender, onMessage will handle it
+  };
 
   return (
     <Box className={classes.container} data-variant={mode}>
       <Box className={classes.header} data-variant={mode}>
         <Text size="xs" fw={700} ff="heading" className={classes.headerText} data-variant={mode}>
-          {heading}
+          {leagueName}
         </Text>
       </Box>
 
-      <ScrollArea className={classes.messageArea} viewportRef={viewportRef} scrollbarSize={4}>
+      <ScrollArea
+        className={classes.messageArea}
+        viewportRef={viewportRef}
+        scrollbarSize={4}
+        onScrollPositionChange={handleScrollPositionChange}
+      >
         <Stack gap="xs" p="sm">
-          {messages.map((msg) => (
-            <MessageBubble key={msg.id} message={msg} mode={mode} />
-          ))}
+          {isFetchingNextPage && (
+            <Center py="xs">
+              <Loader size="xs" color={mode === 'ACADEMIC' ? 'neonCyan.6' : 'neonMagenta.3'} />
+            </Center>
+          )}
+
+          {isLoading ? (
+            <Center style={{ minHeight: 200 }}>
+              <Loader color={mode === 'ACADEMIC' ? 'neonCyan.6' : 'neonMagenta.3'} />
+            </Center>
+          ) : allMessages.length === 0 ? (
+            <Center style={{ minHeight: 200 }}>
+              <Text size="sm" c="dimmed">
+                No messages yet. Say something!
+              </Text>
+            </Center>
+          ) : (
+            allMessages.map((msg) => (
+              <MessageBubble
+                key={msg.id}
+                message={msg}
+                isOwn={msg.senderId === user?.id}
+                mode={mode}
+              />
+            ))
+          )}
+
           <div ref={bottomRef} />
         </Stack>
       </ScrollArea>
 
-      <ChatInput mode={mode} onSend={handleSend} />
+      <ChatInput mode={mode} isMember={true} onSend={handleSend} />
     </Box>
   );
 }

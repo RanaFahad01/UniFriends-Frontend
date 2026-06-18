@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { IconAlertCircle, IconSpeakerphone } from '@tabler/icons-react';
-import { Alert, Box, Button, Center, Group, Loader, Stack, Text, Title } from '@mantine/core';
+import { type CSSProperties, useState } from 'react';
+import { IconAlertCircle, IconSearch, IconSpeakerphone, IconX } from '@tabler/icons-react';
+import { ActionIcon, Alert, Box, Button, Center, Group, Loader, Stack, Text, TextInput, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -24,6 +24,8 @@ export default function Posts({ mode }: PostsProps) {
   const heading = mode === 'academics' ? 'Academic Feed' : 'Extracurriculars Feed';
   const postsPageMainColor = mode === 'academics' ? 'neonCyan.6' : 'neonMagenta.3';
   const buttonColor = mode === 'academics' ? 'neonCyan' : 'neonMagenta';
+
+  const [search, setSearch] = useState('');
 
   const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
@@ -51,6 +53,12 @@ export default function Posts({ mode }: PostsProps) {
   });
 
   const posts = data?.pages.flatMap((page) => page.content) ?? [];
+  const filteredPosts = search
+    ? posts.filter((p) => {
+        const q = search.toLowerCase();
+        return p.title.toLowerCase().includes(q) || p.content.toLowerCase().includes(q);
+      })
+    : posts;
 
   const handlePostClick = (post: Post) => {
     setSelectedPost(post);
@@ -90,6 +98,28 @@ export default function Posts({ mode }: PostsProps) {
           </Button>
         </Group>
 
+        <TextInput
+          placeholder="Filter posts..."
+          value={search}
+          onChange={(e) => setSearch(e.currentTarget.value)}
+          leftSection={<IconSearch size={16} />}
+          rightSection={
+            search ? (
+              <ActionIcon
+                variant="subtle"
+                color="gray"
+                size="sm"
+                onClick={() => setSearch('')}
+                aria-label="Clear filter"
+              >
+                <IconX size={14} />
+              </ActionIcon>
+            ) : null
+          }
+          mb="1rem"
+          styles={mode === 'activities' ? { input: { '--input-bd-focus': 'var(--mantine-color-neonMagenta-6)' } as CSSProperties } : undefined}
+        />
+
         {/* Loading state */}
         {isLoading && (
           <Center py="xl">
@@ -113,10 +143,19 @@ export default function Posts({ mode }: PostsProps) {
           </Center>
         )}
 
+        {/* No filter results */}
+        {!isLoading && !error && posts.length > 0 && filteredPosts.length === 0 && (
+          <Center py="xl">
+            <Text c="dimmed" size="sm">
+              No posts match &ldquo;{search}&rdquo;.
+            </Text>
+          </Center>
+        )}
+
         {/* Posts list */}
-        {posts.length > 0 && (
+        {filteredPosts.length > 0 && (
           <Stack gap="sm">
-            {posts.map((post) => (
+            {filteredPosts.map((post) => (
               <PostCard
                 key={post.id}
                 post={post}
@@ -149,7 +188,13 @@ export default function Posts({ mode }: PostsProps) {
       </ResponsiveModal>
 
       <ResponsiveModal opened={detailOpened} onClose={closeDetail}>
-        {selectedPost && <PostDetail post={selectedPost} variant={mode} />}
+        {selectedPost && (
+          <PostDetail
+            post={selectedPost}
+            variant={mode}
+            onDeleted={() => { closeDetail(); refetch(); }}
+          />
+        )}
       </ResponsiveModal>
     </Box>
   );

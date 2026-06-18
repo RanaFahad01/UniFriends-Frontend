@@ -1,14 +1,15 @@
 import { useState, type KeyboardEvent } from 'react';
-import { IconSend } from '@tabler/icons-react';
-import { ActionIcon, Box, TextInput } from '@mantine/core';
+import { IconLock, IconSend } from '@tabler/icons-react';
+import { ActionIcon, Box, Group, Text, TextInput } from '@mantine/core';
 import classes from './ChatInput.module.css';
 
 interface ChatInputProps {
   mode: 'ACADEMIC' | 'HOMIES';
+  isMember: boolean;
   onSend: (content: string) => void;
 }
 
-export function ChatInput({ mode, onSend }: ChatInputProps) {
+export function ChatInput({ mode, isMember, onSend }: ChatInputProps) {
   const [value, setValue] = useState('');
 
   const handleSend = () => {
@@ -26,6 +27,18 @@ export function ChatInput({ mode, onSend }: ChatInputProps) {
       handleSend();
     }
   };
+
+  // Non-members see a locked notice instead of the input.
+  if (!isMember) {
+    return (
+      <Box className={classes.wrapper}>
+        <Group className={classes.lockedNotice} gap={6} justify="center">
+          <IconLock size={13} />
+          <Text size="xs">Join the league to send messages</Text>
+        </Group>
+      </Box>
+    );
+  }
 
   return (
     <Box className={classes.wrapper}>

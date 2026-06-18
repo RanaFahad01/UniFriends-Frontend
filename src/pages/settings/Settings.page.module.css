@@ -88,3 +88,44 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+
+/* ── Settings landing page ─────────────────────────── */
+
+.landingPage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 1.5rem 1rem 4rem;
+}
+
+.landingContainer {
+  max-width: 48rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.landingHeading {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.profileCardCyan {
+  border-left: 4px solid var(--mantine-color-neonCyan-6);
+}
+
+.profileCardMagenta {
+  border-left: 4px solid var(--mantine-color-neonMagenta-3);
+}
+
+.dangerZone {
+  margin-top: 2.5rem;
+}
+
+@media (min-width: $mantine-breakpoint-sm) {
+  .landingPage {
+    padding: 2rem 2rem 4rem;
+  }
+}

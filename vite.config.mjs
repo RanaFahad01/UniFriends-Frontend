@@ -4,6 +4,9 @@ import { qrcode } from 'vite-plugin-qrcode';
 
 export default defineConfig({
   plugins: [react(), qrcode()],
+  define: {
+    global: 'globalThis',
+  },
   test: {
     globals: true,
     environment: 'jsdom',

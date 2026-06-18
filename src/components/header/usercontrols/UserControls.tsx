@@ -3,9 +3,13 @@ import {
   IconLogout,
   IconPacmanFilled,
   IconSchoolFilled,
-  IconUserFilled,
+  IconSettings,
+  IconSettingsFilled,
+  IconShieldFilled,
 } from '@tabler/icons-react';
+import { useQuery } from '@tanstack/react-query';
 import { clsx } from 'clsx';
+import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
   FloatingPosition,
@@ -16,8 +20,6 @@ import {
   UnstyledButton,
   useMantineTheme,
 } from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '@/api/client';
 import { useAuth } from '@/store/AuthContext';
 import type { League } from '@/types/league';
@@ -50,7 +52,7 @@ export default function UserControls({
 
   const handleAcademicLeagueClick = () => {
     if (academicLeague) {
-      navigate(`/academics/leagues/${academicLeague.id}`);
+      navigate(`/academics/leagues/${academicLeague.id}/chat`);
     } else {
       navigate('/academics/leagues');
     }
@@ -58,7 +60,7 @@ export default function UserControls({
 
   const handleHomiesLeagueClick = () => {
     if (homiesLeague) {
-      navigate(`/activities/leagues/${homiesLeague.id}`);
+      navigate(`/activities/leagues/${homiesLeague.id}/chat`);
     } else {
       navigate('/activities/leagues');
     }
@@ -72,11 +74,15 @@ export default function UserControls({
       withinPortal={withinPortal}
     >
       <Menu.Target>
-        <UnstyledButton
-          className={clsx(classes.user)}
-        >
+        <UnstyledButton className={clsx(classes.user)}>
           <Group gap={7}>
-            <Avatar src={user?.avatarUrl} alt="User avatar" radius="xl" size={20} />
+            <Avatar
+              src={user?.avatarUrl}
+              imageProps={{ referrerPolicy: 'no-referrer' }}
+              alt="User avatar"
+              radius="xl"
+              size={26}
+            />
             <Text fw={700} ff="heading" size="md" c="neonGold" lh={1} mr={3}>
               {user?.username}
             </Text>
@@ -92,23 +98,60 @@ export default function UserControls({
           leftSection={<IconSchoolFilled size={20} color={theme.colors.neonCyan[6]} />}
           onClick={handleAcademicLeagueClick}
         >
-          {academicLeague ? academicLeague.name : 'Browse Academic Leagues'}
+          {academicLeague ? (
+            <Text span c="neonCyan.6" inherit>
+              {academicLeague.name}
+            </Text>
+          ) : (
+            'Browse Academic Leagues'
+          )}
         </Menu.Item>
         <Menu.Item
           className={classes.menuItem}
           leftSection={<IconPacmanFilled size={20} color={theme.colors.neonMagenta[3]} />}
           onClick={handleHomiesLeagueClick}
         >
-          {homiesLeague ? homiesLeague.name : 'Browse Extracurricular Leagues'}
+          {homiesLeague ? (
+            <Text span c="neonMagenta.3" inherit>
+              {homiesLeague.name}
+            </Text>
+          ) : (
+            'Browse Extracurricular Leagues'
+          )}
         </Menu.Item>
 
         <Menu.Label className={classes.menuHeading}>Settings</Menu.Label>
+
         <Menu.Item
           className={classes.menuItem}
-          leftSection={<IconUserFilled size={20} color={theme.colors.neonGold[5]} />}
+          leftSection={<IconSchoolFilled size={20} color={theme.colors.neonCyan[6]} />}
           onClick={() => navigate(`/academics/profile/${user?.id}`)}
         >
-          My Profile
+          Academic Profile
+        </Menu.Item>
+        <Menu.Item
+          className={classes.menuItem}
+          leftSection={<IconPacmanFilled size={20} color={theme.colors.neonMagenta[3]} />}
+          onClick={() => navigate(`/activities/profile/${user?.id}`)}
+        >
+          Extracurricular Profile
+        </Menu.Item>
+        {user?.role === 'ADMIN' && (
+          <Menu.Item
+            className={classes.menuItem}
+            leftSection={<IconShieldFilled size={20} color={theme.colors.neonGold[5]} />}
+            onClick={() => navigate('/admin')}
+          >
+            Admin Panel
+          </Menu.Item>
+        )}
+
+        <Menu.Item
+          className={classes.menuItem}
+          leftSection={<IconSettingsFilled size={20} color={theme.colors.neonGold[5]} />}
+          onClick={() => navigate('/settings')}
+        >
+          Settings
         </Menu.Item>
 
         <MenuDivider />

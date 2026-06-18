@@ -59,3 +59,10 @@
   color: var(--mantine-color-dark-3);
   cursor: not-allowed;
 }
+
+/* Shown in place of the input when the user has not joined the league */
+.lockedNotice {
+  padding: var(--mantine-spacing-xs) 0;
+  color: var(--mantine-color-dark-2);
+  user-select: none;
+}

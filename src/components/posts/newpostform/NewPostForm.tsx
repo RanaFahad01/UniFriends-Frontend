@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { IconAlertCircle } from '@tabler/icons-react';
-import { Alert, Button, MultiSelect, Stack, Textarea, TextInput, Title } from '@mantine/core';
+import { Button, MultiSelect, Stack, Textarea, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { apiFetch } from '@/api/client';
 import { ACADEMIC_TAGS, ACTIVITY_TAGS } from '@/constants/tags';
 import type { ApiError } from '@/types/api-error';
 import type { Post } from '@/types/post';
+import { notifyError, notifySuccess } from '@/utils/notify';
 import classes from './NewPostForm.module.css';
 
 interface NewPostFormProps {
@@ -20,7 +20,6 @@ interface FormValues {
 }
 
 export function NewPostForm({ mode, onSuccess }: NewPostFormProps) {
-  const [apiError, setApiError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const isAcademic = mode === 'academics';
@@ -51,7 +50,6 @@ export function NewPostForm({ mode, onSuccess }: NewPostFormProps) {
   });
 
   const handleSubmit = async (values: FormValues) => {
-    setApiError(null);
     setSubmitting(true);
     try {
       await apiFetch<Post>('/api/posts', {
@@ -65,9 +63,10 @@ export function NewPostForm({ mode, onSuccess }: NewPostFormProps) {
         }),
       });
       form.reset();
+      notifySuccess('Post created!');
       onSuccess();
     } catch (err) {
-      setApiError((err as ApiError).message ?? 'Something went wrong. Please try again.');
+      notifyError((err as ApiError).message ?? 'Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -79,18 +78,6 @@ export function NewPostForm({ mode, onSuccess }: NewPostFormProps) {
         <Title order={3} className={`${classes.heading} ${accentColor}`}>
           {headingText}
         </Title>
-
-        {apiError && (
-          <Alert
-            icon={<IconAlertCircle size={16} />}
-            color="red"
-            variant="light"
-            onClose={() => setApiError(null)}
-            withCloseButton
-          >
-            {apiError}
-          </Alert>
-        )}
 
         <TextInput
           label="Title"

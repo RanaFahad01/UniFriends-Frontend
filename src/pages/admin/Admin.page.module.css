@@ -1,0 +1,46 @@
+.page {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 1.5rem 1rem 4rem;
+}
+
+.container {
+    max-width: 52rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.heading {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.reporterLink {
+    color: var(--mantine-color-neonCyan-5);
+    text-decoration: none;
+    font-size: var(--mantine-font-size-sm);
+}
+
+.reporterLink:hover {
+    text-decoration: underline;
+}
+
+.reporteeLink {
+    color: var(--mantine-color-neonMagenta-3);
+    text-decoration: none;
+    font-size: var(--mantine-font-size-sm);
+}
+
+.reporteeLink:hover {
+    text-decoration: underline;
+}
+
+@media (min-width: $mantine-breakpoint-sm) {
+    .page {
+        padding: 2rem 2rem 4rem;
+    }
+}

@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { IconAlertCircle } from '@tabler/icons-react';
 import {
-  Alert,
   Box,
   Button,
   Image,
@@ -18,6 +16,7 @@ import { useForm } from '@mantine/form';
 import { apiFetch } from '@/api/client';
 import type { ApiError } from '@/types/api-error';
 import type { League } from '@/types/league';
+import { notifyError, notifySuccess } from '@/utils/notify';
 import classes from './NewLeagueForm.module.css';
 
 interface NewLeagueFormProps {
@@ -33,7 +32,6 @@ interface FormValues {
 }
 
 export function NewLeagueForm({ mode, mascots, onSuccess }: NewLeagueFormProps) {
-  const [apiError, setApiError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const isAcademic = mode === 'ACADEMIC';
@@ -71,7 +69,6 @@ export function NewLeagueForm({ mode, mascots, onSuccess }: NewLeagueFormProps) 
   });
 
   const handleSubmit = async (values: FormValues) => {
-    setApiError(null);
     setSubmitting(true);
     try {
       await apiFetch<League>('/api/leagues', {
@@ -85,9 +82,10 @@ export function NewLeagueForm({ mode, mascots, onSuccess }: NewLeagueFormProps) 
         }),
       });
       form.reset();
+      notifySuccess('League created!');
       onSuccess();
     } catch (err) {
-      setApiError((err as ApiError).message ?? 'Something went wrong. Please try again.');
+      notifyError((err as ApiError).message ?? 'Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -101,18 +99,6 @@ export function NewLeagueForm({ mode, mascots, onSuccess }: NewLeagueFormProps) 
         <Title order={3} className={`${classes.heading} ${accentColor}`}>
           {headingText}
         </Title>
-
-        {apiError && (
-          <Alert
-            icon={<IconAlertCircle size={16} />}
-            color="red"
-            variant="light"
-            onClose={() => setApiError(null)}
-            withCloseButton
-          >
-            {apiError}
-          </Alert>
-        )}
 
         <TextInput
           label="League Name"

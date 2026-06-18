@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { IconAlertCircle, IconEdit, IconFlag } from '@tabler/icons-react';
-import { useQuery } from '@tanstack/react-query';
+import { IconAlertCircle, IconChevronDown, IconEdit, IconFlag } from '@tabler/icons-react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Alert,
@@ -11,6 +11,7 @@ import {
   Divider,
   Group,
   Loader,
+  Menu,
   Stack,
   Text,
   Textarea,
@@ -23,6 +24,7 @@ import { ResponsiveModal } from '@/components/shared/ResponsiveModal';
 import { useAuth } from '@/store/AuthContext';
 import type { ApiError } from '@/types/api-error';
 import type { UserProfile } from '@/types/userProfile';
+import { notifyError, notifySuccess } from '@/utils/notify';
 import classes from './UserProfile.page.module.css';
 
 interface UserProfilePageProps {
@@ -37,6 +39,7 @@ export default function UserProfilePage({ type }: UserProfilePageProps) {
   const { userId } = useParams<{ userId: string }>();
   const { user: currentUser } = useAuth();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const profileType = type === 'STUDENT' ? 'STUDENT' : 'PERSONALITY';
   const isAcademic = type === 'STUDENT';
@@ -47,8 +50,6 @@ export default function UserProfilePage({ type }: UserProfilePageProps) {
   const [reportModalOpened, { open: openReportModal, close: closeReportModal }] =
     useDisclosure(false);
   const [reportSubmitting, setReportSubmitting] = useState(false);
-  const [reportApiError, setReportApiError] = useState<string | null>(null);
-  const [reportSuccess, setReportSuccess] = useState(false);
 
   const reportForm = useForm<ReportFormValues>({
     initialValues: { reason: '' },
@@ -70,6 +71,18 @@ export default function UserProfilePage({ type }: UserProfilePageProps) {
 
   const parsedUserId = userId ? parseInt(userId, 10) : null;
 
+  const roleMutation = useMutation({
+    mutationFn: ({ path, method }: { path: string; method: string }) =>
+      apiFetch(path, { method }),
+    onSuccess: () => {
+      notifySuccess('Role updated.');
+      queryClient.invalidateQueries({ queryKey: ['userProfile', parsedUserId, profileType] });
+    },
+    onError: (err: ApiError) => {
+      notifyError(err.message ?? 'Could not update role. Please try again.');
+    },
+  });
+
   const {
     data: profile,
     isLoading,
@@ -81,10 +94,7 @@ export default function UserProfilePage({ type }: UserProfilePageProps) {
   });
 
   const handleReportSubmit = async (values: ReportFormValues) => {
-    if (!parsedUserId) {
-      return;
-    }
-    setReportApiError(null);
+    if (!parsedUserId) return;
     setReportSubmitting(true);
     try {
       await apiFetch<void>(`/api/users/${parsedUserId}/report`, {
@@ -92,14 +102,11 @@ export default function UserProfilePage({ type }: UserProfilePageProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reason: values.reason.trim() }),
       });
-      setReportSuccess(true);
       reportForm.reset();
-      setTimeout(() => {
-        closeReportModal();
-        setReportSuccess(false);
-      }, 1500);
+      closeReportModal();
+      notifySuccess('Report submitted. Thank you.');
     } catch (err) {
-      setReportApiError((err as ApiError).message ?? 'Something went wrong. Please try again.');
+      notifyError((err as ApiError).message ?? 'Something went wrong. Please try again.');
     } finally {
       setReportSubmitting(false);
     }
@@ -155,7 +162,7 @@ export default function UserProfilePage({ type }: UserProfilePageProps) {
       <Box className={classes.container}>
         {/* Avatar + Username */}
         <Box className={classes.avatarSection}>
-          <Avatar src={profile.avatarUrl} size={96} radius="xl" alt={profile.username ?? 'User'} />
+          <Avatar src={profile.avatarUrl} imageProps={{ referrerPolicy: 'no-referrer' }} size={96} radius="xl" alt={profile.username ?? 'User'} />
           <Title
             order={2}
             c={accentColor}
@@ -215,29 +222,101 @@ export default function UserProfilePage({ type }: UserProfilePageProps) {
         {/* Action Buttons */}
         {currentUser && (
           <Box className={classes.actionButtons}>
-            {isOwnProfile ? (
-              <Button
-                variant="outline"
-                color={buttonColor}
-                leftSection={<IconEdit size={16} />}
-                ff="heading"
-                fz="lg"
-                onClick={() => navigate(settingsPath)}
-              >
-                Edit Profile
-              </Button>
-            ) : (
-              <Button
-                variant="outline"
-                color="red"
-                leftSection={<IconFlag size={16} />}
-                ff="heading"
-                fz="lg"
-                onClick={openReportModal}
-              >
-                Report User
-              </Button>
-            )}
+            <Group gap="sm" wrap="wrap">
+              {isOwnProfile ? (
+                <Button
+                  variant="outline"
+                  color={buttonColor}
+                  leftSection={<IconEdit size={16} />}
+                  ff="heading"
+                  fz="lg"
+                  onClick={() => navigate(settingsPath)}
+                >
+                  Edit Profile
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  color="red"
+                  leftSection={<IconFlag size={16} />}
+                  ff="heading"
+                  fz="lg"
+                  onClick={openReportModal}
+                >
+                  Report User
+                </Button>
+              )}
+
+              {currentUser.role === 'ADMIN' && !isOwnProfile && (
+                <Menu position="bottom-start">
+                  <Menu.Target>
+                    <Button
+                      variant="outline"
+                      color="neonGold"
+                      rightSection={<IconChevronDown size={14} />}
+                      ff="heading"
+                      fz="lg"
+                      loading={roleMutation.isPending}
+                    >
+                      Manage Role
+                    </Button>
+                  </Menu.Target>
+                  <Menu.Dropdown>
+                    {profile.role === 'USER' && (
+                      <>
+                        <Menu.Item
+                          onClick={() =>
+                            roleMutation.mutate({
+                              path: `/api/admin/users/${parsedUserId}/make-moderator`,
+                              method: 'POST',
+                            })
+                          }
+                        >
+                          Promote to Moderator
+                        </Menu.Item>
+                        <Menu.Item
+                          onClick={() =>
+                            roleMutation.mutate({
+                              path: `/api/admin/users/${parsedUserId}/make-admin`,
+                              method: 'POST',
+                            })
+                          }
+                        >
+                          Promote to Admin
+                        </Menu.Item>
+                      </>
+                    )}
+                    {profile.role === 'MODERATOR' && (
+                      <Menu.Item
+                        color="red"
+                        onClick={() =>
+                          roleMutation.mutate({
+                            path: `/api/admin/users/${parsedUserId}/make-moderator`,
+                            method: 'DELETE',
+                          })
+                        }
+                      >
+                        Demote to User
+                      </Menu.Item>
+                    )}
+                    {profile.role === 'ADMIN' && (
+                      <Menu.Item
+                        color="red"
+                        onClick={() =>
+                          roleMutation.mutate({
+                            path: `/api/admin/users/${parsedUserId}/make-admin`,
+                            method: 'DELETE',
+                          })
+                        }
+                      >
+                        Demote to User
+                      </Menu.Item>
+                    )}
+                  </Menu.Dropdown>
+                </Menu>
+              )}
+            </Group>
+
           </Box>
         )}
       </Box>
@@ -254,24 +333,6 @@ export default function UserProfilePage({ type }: UserProfilePageProps) {
             >
               Report User
             </Title>
-
-            {reportSuccess && (
-              <Alert icon={<IconAlertCircle size={16} />} color="green" variant="light">
-                Report submitted. Thank you.
-              </Alert>
-            )}
-
-            {reportApiError && (
-              <Alert
-                icon={<IconAlertCircle size={16} />}
-                color="red"
-                variant="light"
-                onClose={() => setReportApiError(null)}
-                withCloseButton
-              >
-                {reportApiError}
-              </Alert>
-            )}
 
             <Textarea
               label="Reason"

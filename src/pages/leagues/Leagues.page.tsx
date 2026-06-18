@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { IconAlertCircle, IconUsersGroup } from '@tabler/icons-react';
-import { Alert, Box, Button, Center, Group, Loader, SimpleGrid, Text, Title } from '@mantine/core';
+import { type CSSProperties, useEffect, useState } from 'react';
+import { IconAlertCircle, IconSearch, IconUsersGroup, IconX } from '@tabler/icons-react';
+import { ActionIcon, Alert, Box, Button, Center, Group, Loader, SimpleGrid, Text, TextInput, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -71,6 +71,12 @@ export default function Leagues({ mode }: LeaguesProps) {
   const leaguesPageMainColor = mode === 'ACADEMIC' ? 'neonCyan.6' : 'neonMagenta.3';
   const buttonColor = mode === 'ACADEMIC' ? 'neonCyan' : 'neonMagenta';
 
+  const [search, setSearch] = useState('');
+  const filteredLeagues = leagues.filter((l) => {
+    const q = search.toLowerCase();
+    return l.name.toLowerCase().includes(q) || (l.description ?? '').toLowerCase().includes(q);
+  });
+
   const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
   const [detailOpened, { open: openDetail, close: closeDetail }] = useDisclosure(false);
   const [selectedLeague, setSelectedLeague] = useState<League | null>(null);
@@ -119,6 +125,28 @@ export default function Leagues({ mode }: LeaguesProps) {
           interests.
         </Text>
 
+        <TextInput
+          placeholder="Search leagues..."
+          value={search}
+          onChange={(e) => setSearch(e.currentTarget.value)}
+          leftSection={<IconSearch size={16} />}
+          rightSection={
+            search ? (
+              <ActionIcon
+                variant="subtle"
+                color="gray"
+                size="sm"
+                onClick={() => setSearch('')}
+                aria-label="Clear search"
+              >
+                <IconX size={14} />
+              </ActionIcon>
+            ) : null
+          }
+          mt="lg"
+          styles={mode === 'HOMIES' ? { input: { '--input-bd-focus': 'var(--mantine-color-neonMagenta-6)' } as CSSProperties } : undefined}
+        />
+
         {/* Loading state */}
         {isLoading && (
           <Center mt={50}>
@@ -142,10 +170,19 @@ export default function Leagues({ mode }: LeaguesProps) {
           </Center>
         )}
 
+        {/* No filter results */}
+        {!isLoading && !error && leagues.length > 0 && filteredLeagues.length === 0 && (
+          <Center mt={50}>
+            <Text c="dimmed" size="sm">
+              No leagues match &ldquo;{search}&rdquo;.
+            </Text>
+          </Center>
+        )}
+
         {/* League grid */}
-        {leagues.length > 0 && (
+        {filteredLeagues.length > 0 && (
           <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl" mt={50} p={{ base: 'sm', md: 0 }}>
-            {leagues.map((league) => (
+            {filteredLeagues.map((league) => (
               <LeagueCard
                 key={league.id}
                 mode={mode}

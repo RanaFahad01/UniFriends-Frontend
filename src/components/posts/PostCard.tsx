@@ -16,7 +16,7 @@ export function PostCard({ post, variant, onClick }: PostCardProps) {
   return (
     <Card className={clsx(classes.card, classes[variant])} padding="md" radius="sm" onClick={onClick}>
       <Group gap="sm" wrap="nowrap" align="flex-start">
-        <Avatar src={post.authorAvatarUrl} radius="xl" size="md" alt={post.authorUsername ?? 'User'} />
+        <Avatar src={post.authorAvatarUrl} imageProps={{ referrerPolicy: 'no-referrer' }} radius="xl" size="md" alt={post.authorUsername ?? 'User'} />
         <Box className={classes.content}>
           <Group gap={6} align="center">
             <Text size="sm" fw={600}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IconAlertCircle, IconArrowLeft, IconCheck } from '@tabler/icons-react';
+import { IconAlertCircle, IconArrowLeft } from '@tabler/icons-react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -22,6 +22,7 @@ import { useAuth } from '@/store/AuthContext';
 import type { ApiError } from '@/types/api-error';
 import type { Profile } from '@/types/profile';
 import type { UserProfile } from '@/types/userProfile';
+import { notifyError, notifySuccess } from '@/utils/notify';
 import classes from './Settings.page.module.css';
 
 interface FormValues {
@@ -34,8 +35,6 @@ export default function StudentProfileSettings() {
   const { user } = useAuth();
 
   const [submitting, setSubmitting] = useState(false);
-  const [apiError, setApiError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
 
   const form = useForm<FormValues>({
     initialValues: { bio: '', tags: [] },
@@ -71,7 +70,6 @@ export default function StudentProfileSettings() {
     if (!profile) {
       return;
     }
-    setApiError(null);
     setSubmitting(true);
     try {
       await apiFetch<Profile>(`/api/profiles/${profile.id}`, {
@@ -83,10 +81,10 @@ export default function StudentProfileSettings() {
           hobbies: profile.hobbies ?? '',
         }),
       });
-      setSuccess(true);
-      setTimeout(() => navigate(`/academics/profile/${user!.id}`), 1500);
+      notifySuccess('Profile updated!');
+      navigate(`/academics/profile/${user!.id}`);
     } catch (err) {
-      setApiError((err as ApiError).message ?? 'Something went wrong. Please try again.');
+      notifyError((err as ApiError).message ?? 'Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -145,31 +143,12 @@ export default function StudentProfileSettings() {
                   {...form.getInputProps('tags')}
                 />
 
-                {apiError && (
-                  <Alert
-                    icon={<IconAlertCircle size={16} />}
-                    color="red"
-                    variant="light"
-                    withCloseButton
-                    onClose={() => setApiError(null)}
-                  >
-                    {apiError}
-                  </Alert>
-                )}
-
-                {success && (
-                  <Alert icon={<IconCheck size={16} />} color="green" variant="light">
-                    Profile updated! Redirecting…
-                  </Alert>
-                )}
-
                 <Button
                   type="submit"
                   color="neonCyan"
                   fullWidth
                   size="md"
                   loading={submitting}
-                  disabled={success}
                   className={classes.submitButton}
                 >
                   Save Changes

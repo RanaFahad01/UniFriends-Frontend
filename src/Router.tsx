@@ -6,7 +6,6 @@ import { ProtectedRoute } from './layouts/ProtectedRoute';
 import { RootLayout } from './layouts/RootLayout';
 import AuthCallback from './pages/auth/AuthCallback.page';
 import { HomePage } from './pages/homepage/Home.page';
-import Leagues from './pages/leagues/Leagues.page';
 import LoginSignup from './pages/loginsignup/LoginSignup.page';
 import Onboarding from './pages/onboarding/Onboarding.page';
 import Posts from './pages/posts/Posts.page';
@@ -16,6 +15,10 @@ import PersonalityProfileSettings from './pages/settings/PersonalityProfile.page
 import StudentProfileSettings from './pages/settings/StudentProfile.page';
 
 const LeaguesPage = lazy(() => import('./pages/leagues/Leagues.page'));
+const LeagueChatPage = lazy(() => import('./pages/leagues/LeagueChat.page'));
+const AdminPage = lazy(() => import('./pages/admin/Admin.page'));
+const SettingsPage = lazy(() => import('./pages/settings/Settings.page'));
+const NotFoundPage = lazy(() => import('./pages/notfound/NotFound.page'));
 
 const router = createBrowserRouter([
   {
@@ -41,6 +44,20 @@ const router = createBrowserRouter([
             ),
           },
           { path: 'profile/:userId', element: <UserProfile type="STUDENT" /> },
+          // Protected: requires login
+          {
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: 'leagues/:id/chat',
+                element: (
+                  <Suspense fallback={null}>
+                    <LeagueChatPage mode="ACADEMIC" />
+                  </Suspense>
+                ),
+              },
+            ],
+          },
         ],
       },
       {
@@ -52,11 +69,25 @@ const router = createBrowserRouter([
             path: 'leagues',
             element: (
               <Suspense fallback={null}>
-                <Leagues mode="HOMIES" />
+                <LeaguesPage mode="HOMIES" />
               </Suspense>
             ),
           },
           { path: 'profile/:userId', element: <UserProfile type="HOMIES" /> },
+          // Protected: requires login
+          {
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: 'leagues/:id/chat',
+                element: (
+                  <Suspense fallback={null}>
+                    <LeagueChatPage mode="HOMIES" />
+                  </Suspense>
+                ),
+              },
+            ],
+          },
         ],
       },
 
@@ -64,6 +95,14 @@ const router = createBrowserRouter([
       {
         element: <ProtectedRoute />,
         children: [
+          {
+            path: '/settings',
+            element: (
+              <Suspense fallback={null}>
+                <SettingsPage />
+              </Suspense>
+            ),
+          },
           { path: '/settings/student-profile', element: <StudentProfileSettings /> },
           { path: '/settings/personality-profile', element: <PersonalityProfileSettings /> },
         ],
@@ -73,8 +112,25 @@ const router = createBrowserRouter([
       {
         element: <ProtectedRoute requiredRole="ADMIN" />,
         children: [
-          // TODO: add /admin page
+          {
+            path: '/admin',
+            element: (
+              <Suspense fallback={null}>
+                <AdminPage />
+              </Suspense>
+            ),
+          },
         ],
+      },
+
+      // 404
+      {
+        path: '*',
+        element: (
+          <Suspense fallback={null}>
+            <NotFoundPage />
+          </Suspense>
+        ),
       },
     ],
   },

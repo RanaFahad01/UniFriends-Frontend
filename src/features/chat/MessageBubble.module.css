@@ -76,6 +76,16 @@
   line-height: 1.55;
 }
 
+.timestamp {
+  font-size: 0.62rem;
+  color: var(--mantine-color-dark-2);
+  margin-top: 3px;
+}
+
+.timestamp[data-own='true'] {
+  text-align: right;
+}
+
 .avatar {
   font-family: var(--mantine-font-family-headings);
   font-weight: 700;
