@@ -3,9 +3,6 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { NavigationProgress } from '@/components/navigationprogress/NavigationProgress';
 import { useAuth } from '@/store/AuthContext';
 
-// Routes where a new user should NOT be intercepted and redirected to onboarding.
-// /auth/callback handles its own redirect logic after OAuth completes.
-// /onboarding is the destination itself.
 const ONBOARDING_EXEMPT = ['/auth/callback', '/onboarding'];
 
 export function RootLayout() {

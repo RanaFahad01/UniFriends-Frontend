@@ -20,7 +20,6 @@ export function LeagueChat({ leagueId, leagueName, mode }: LeagueChatProps) {
   const [realtimeMessages, setRealtimeMessages] = useState<ChatMessage[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
-  // Track message count to detect when older pages are prepended vs new realtime messages
   const prevMessageCountRef = useRef(0);
 
   const { messages, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
@@ -36,7 +35,6 @@ export function LeagueChat({ leagueId, leagueName, mode }: LeagueChatProps) {
 
   const { sendMessage } = useStompChat({ leagueId, enabled: true, onMessage: handleMessage });
 
-  // Deduplicate realtime messages against history (avoids duplicate on reconnect re-fetch)
   const historyIds = new Set(messages.map((m) => m.id));
   const filteredRealtime = realtimeMessages.filter((m) => !historyIds.has(m.id));
   const allMessages = [...messages, ...filteredRealtime];
@@ -61,10 +59,8 @@ export function LeagueChat({ leagueId, leagueName, mode }: LeagueChatProps) {
     if (!viewport) return;
     const prev = prevMessageCountRef.current;
     const current = allMessages.length;
-    // Only restore if history grew (not realtime)
     if (current > prev && prev > 0 && filteredRealtime.length === realtimeMessages.length) {
       const oldScrollHeight = viewport.scrollHeight;
-      // After React has painted the new nodes, shift the scroll position
       requestAnimationFrame(() => {
         viewport.scrollTop = viewport.scrollHeight - oldScrollHeight;
       });
@@ -85,7 +81,6 @@ export function LeagueChat({ leagueId, leagueName, mode }: LeagueChatProps) {
 
   const handleSend = (content: string) => {
     sendMessage(content);
-    // No optimistic add — server broadcasts back to sender, onMessage will handle it
   };
 
   return (

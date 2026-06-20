@@ -96,7 +96,6 @@ export default function Onboarding() {
   const handleCheckUsername = async () => {
     const { username } = form.values;
 
-    // Client-side format validation first — no network call needed
     const formatError = form.validateField('username').error;
     if (formatError) {
       return;

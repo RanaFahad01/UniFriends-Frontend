@@ -53,7 +53,7 @@ export default function SettingsPage() {
   const usernameMatches = confirmUsername === user?.username;
 
   return (
-    <Box className={classes.page} style={{ background: '#0e0e0e', minHeight: '100vh' }}>
+    <Box className={classes.page}>
       <BackgroundEffectsCyan />
       <ScanlineOverlay />
 

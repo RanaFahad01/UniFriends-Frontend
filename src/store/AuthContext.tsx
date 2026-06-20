@@ -13,8 +13,6 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  // Only show a loading state if a session cookie is present. Otherwise we
-  // know immediately that the user is logged out and don't need a /me call.
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(hasSession());
 
@@ -37,8 +35,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function logout(): Promise<void> {
     await apiFetch('/api/auth/logout', { method: 'POST' });
     setUser(null);
-    // Full page navigation resets all in-memory state. AuthProvider sits
-    // outside RouterProvider so useNavigate is not available here.
     window.location.href = '/login';
   }
 

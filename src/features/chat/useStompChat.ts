@@ -33,8 +33,6 @@ export function useStompChat({ leagueId, enabled, onMessage }: UseStompChatOptio
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
     const client = new Client({
-      // Fetch a fresh ticket before every connection attempt (handles reconnects
-      // where the original 30s-TTL ticket would already be expired)
       beforeConnect: async () => {
         const { ticket } = await apiFetch<{ ticket: string }>('/api/auth/ws-ticket');
         client.connectHeaders = { Authorization: `Bearer ${ticket}` };
@@ -44,7 +42,6 @@ export function useStompChat({ leagueId, enabled, onMessage }: UseStompChatOptio
       onConnect: () => {
         setIsConnected(true);
 
-        // Re-fetch history to fill any gap from the disconnect window
         queryClient.invalidateQueries({ queryKey: ['chat', 'messages', leagueId] });
 
         client.subscribe(`/topic/league/${leagueId}`, (frame) => {
