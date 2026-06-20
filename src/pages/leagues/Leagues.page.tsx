@@ -46,6 +46,10 @@ export default function Leagues({ mode }: LeaguesProps) {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = mode === 'ACADEMIC' ? 'Academic Leagues · UniFriends' : 'Extracurricular Leagues · UniFriends';
+  }, [mode]);
+
   // Load local mascot image URLs
   const [mascots, setMascots] = useState<Record<string, string>>({});
 

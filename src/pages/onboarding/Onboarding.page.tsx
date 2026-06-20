@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { IconCheck, IconLogout, IconX } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -42,6 +42,8 @@ interface UsernameCheckResponse {
 export default function Onboarding() {
   const navigate = useNavigate();
   const { refreshUser } = useAuth();
+
+  useEffect(() => { document.title = 'Create your profile! · UniFriends'; }, []);
 
   const [usernameStatus, setUsernameStatus] = useState<UsernameStatus>('idle');
   const [submitting, setSubmitting] = useState(false);

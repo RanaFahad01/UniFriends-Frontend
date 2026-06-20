@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { IconArrowLeft } from '@tabler/icons-react';
 import { Box, Button, Center, Loader, Text, Title } from '@mantine/core';
@@ -37,6 +38,12 @@ export default function LeagueChatPage({ mode }: LeagueChatPageProps) {
     queryFn: () => apiFetch<League[]>('/api/leagues/me'),
     enabled: !!user,
   });
+
+  useEffect(() => {
+    if (league) {
+      document.title = `${league.name} Chat · UniFriends`;
+    }
+  }, [league]);
 
   if (isNaN(leagueId)) {
     return (

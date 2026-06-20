@@ -1,4 +1,4 @@
-import { type CSSProperties, useState } from 'react';
+import { type CSSProperties, useEffect, useState } from 'react';
 import { IconAlertCircle, IconSearch, IconSpeakerphone, IconX } from '@tabler/icons-react';
 import { ActionIcon, Alert, Box, Button, Center, Group, Loader, Stack, Text, TextInput, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
@@ -23,6 +23,10 @@ export default function Posts({ mode }: PostsProps) {
   const apiType = mode === 'academics' ? 'ACADEMIC' : 'HOMIES';
   const heading = mode === 'academics' ? 'Academic Feed' : 'Extracurriculars Feed';
   const postsPageMainColor = mode === 'academics' ? 'neonCyan.6' : 'neonMagenta.3';
+
+  useEffect(() => {
+    document.title = mode === 'academics' ? 'Academic Posts · UniFriends' : 'Extracurricular Posts · UniFriends';
+  }, [mode]);
   const buttonColor = mode === 'academics' ? 'neonCyan' : 'neonMagenta';
 
   const [search, setSearch] = useState('');

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IconAlertCircle, IconArrowLeft, IconBan, IconCircleCheck } from '@tabler/icons-react';
 import {
@@ -39,6 +39,8 @@ const STATUS_BADGE_COLOR: Record<ReportStatus, string> = {
 export default function AdminPage() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+
+  useEffect(() => { document.title = 'Admin Dashboard · UniFriends'; }, []);
 
   const [status, setStatus] = useState<ReportStatus>('PENDING');
 

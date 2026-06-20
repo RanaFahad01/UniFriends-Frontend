@@ -34,6 +34,8 @@ export default function PersonalityProfileSettings() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
+  useEffect(() => { document.title = 'Personality Profile Settings · UniFriends'; }, []);
+
   const [submitting, setSubmitting] = useState(false);
 
   const form = useForm<FormValues>({

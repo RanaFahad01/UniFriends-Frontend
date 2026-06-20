@@ -1,4 +1,5 @@
-﻿import { Link } from 'react-router-dom';
+﻿import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@mantine/core';
 import { BackgroundEffectsMagenta } from '@/components/LandingPage/BackgroundEffects/BackgroundEffectsMagenta';
 import { HeroSection } from '@/components/LandingPage/HeroSection/HeroSection';
@@ -8,6 +9,8 @@ import { SectionCard } from '@/components/LandingPage/SectionCard/SectionCard';
 import classes from './Home.page.module.css';
 
 export function HomePage() {
+  useEffect(() => { document.title = 'UniFriends'; }, []);
+
   return (
     <div className={classes.page}>
       {/* <BackgroundEffectsLandingPage /> */}

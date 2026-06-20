@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconAlertCircle, IconChevronDown, IconEdit, IconFlag } from '@tabler/icons-react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -92,6 +92,12 @@ export default function UserProfilePage({ type }: UserProfilePageProps) {
     queryFn: () => apiFetch<UserProfile>(`/api/users/${parsedUserId}/profile?type=${profileType}`),
     enabled: !!parsedUserId && !isNaN(parsedUserId),
   });
+
+  useEffect(() => {
+    if (profile) {
+      document.title = `${profile.username ?? 'User'}'s Profile · UniFriends`;
+    }
+  }, [profile]);
 
   const handleReportSubmit = async (values: ReportFormValues) => {
     if (!parsedUserId) return;

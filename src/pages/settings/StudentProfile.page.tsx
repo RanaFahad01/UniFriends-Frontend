@@ -34,6 +34,8 @@ export default function StudentProfileSettings() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
+  useEffect(() => { document.title = 'Student Profile Settings · UniFriends'; }, []);
+
   const [submitting, setSubmitting] = useState(false);
 
   const form = useForm<FormValues>({

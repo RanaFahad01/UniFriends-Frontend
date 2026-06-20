@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { IconAlertCircle, IconArrowLeft, IconPacmanFilled, IconSchoolFilled, IconTrash } from '@tabler/icons-react';
 import {
   ActionIcon,
@@ -28,6 +28,8 @@ import classes from './Settings.page.module.css';
 export default function SettingsPage() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+
+  useEffect(() => { document.title = 'UniFriends Settings'; }, []);
 
   const [deleteModalOpened, { open: openDeleteModal, close: closeDeleteModal }] =
     useDisclosure(false);

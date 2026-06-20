@@ -1,4 +1,5 @@
-﻿import { Link } from 'react-router-dom';
+﻿import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Text, Title } from '@mantine/core';
 import { Header } from '@/components/header/Header';
 import { BackgroundEffectsCyan } from '@/components/LandingPage/BackgroundEffects/BackgroundEffectsCyan';
@@ -11,6 +12,8 @@ const handleLogin = () => {
 };
 
 export default function LoginSignup() {
+  useEffect(() => { document.title = 'Enter UniFriends!'; }, []);
+
   return (
     <Box className={classes.page}>
       <BackgroundEffectsCyan />
