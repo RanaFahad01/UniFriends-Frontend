@@ -9,6 +9,10 @@ export async function apiFetch<T = void>(path: string, init?: RequestInit): Prom
   });
 
   if (!res.ok) {
+    if (res.status === 401) {
+      window.location.href = '/login';
+      return undefined as T;
+    }
     const errText = await res.text();
     const err: ApiError = errText
       ? (JSON.parse(errText) as ApiError)
