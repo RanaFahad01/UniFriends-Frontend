@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { IconAlertCircle, IconArrowLeft, IconPacmanFilled, IconSchoolFilled, IconTrash } from '@tabler/icons-react';
 import {
   ActionIcon,
@@ -18,8 +18,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '@/api/client';
-import { BackgroundEffectsCyan } from '@/components/landingpage/BackgroundEffects/BackgroundEffectsCyan';
-import { ScanlineOverlay } from '@/components/landingpage/ScanlineOverlay/ScanlineOverlay';
+import { BackgroundEffectsCyan } from '@/components/LandingPage/BackgroundEffects/BackgroundEffectsCyan';
+import { ScanlineOverlay } from '@/components/LandingPage/ScanlineOverlay/ScanlineOverlay';
 import { ResponsiveModal } from '@/components/shared/ResponsiveModal';
 import { useAuth } from '@/store/AuthContext';
 import type { ApiError } from '@/types/api-error';

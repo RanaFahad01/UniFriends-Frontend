@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { IconArrowLeft, IconAlertCircle } from '@tabler/icons-react';
 import {
   Alert,
@@ -15,8 +15,8 @@ import { useForm } from '@mantine/form';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '@/api/client';
-import { BackgroundEffectsMagenta } from '@/components/landingpage/BackgroundEffects/BackgroundEffectsMagenta';
-import { ScanlineOverlay } from '@/components/landingpage/ScanlineOverlay/ScanlineOverlay';
+import { BackgroundEffectsMagenta } from '@/components/LandingPage/BackgroundEffects/BackgroundEffectsMagenta';
+import { ScanlineOverlay } from '@/components/LandingPage/ScanlineOverlay/ScanlineOverlay';
 import { ACTIVITY_TAGS } from '@/constants/tags';
 import { useAuth } from '@/store/AuthContext';
 import type { ApiError } from '@/types/api-error';

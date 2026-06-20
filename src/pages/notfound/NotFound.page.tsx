@@ -1,8 +1,8 @@
-import { IconArrowLeft } from '@tabler/icons-react';
+﻿import { IconArrowLeft } from '@tabler/icons-react';
 import { Box, Button, Text, Title } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-import { BackgroundEffectsCyan } from '@/components/landingpage/BackgroundEffects/BackgroundEffectsCyan';
-import { ScanlineOverlay } from '@/components/landingpage/ScanlineOverlay/ScanlineOverlay';
+import { BackgroundEffectsCyan } from '@/components/LandingPage/BackgroundEffects/BackgroundEffectsCyan';
+import { ScanlineOverlay } from '@/components/LandingPage/ScanlineOverlay/ScanlineOverlay';
 import classes from './NotFound.page.module.css';
 
 export default function NotFoundPage() {

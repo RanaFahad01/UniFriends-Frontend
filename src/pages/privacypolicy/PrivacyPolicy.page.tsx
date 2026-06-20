@@ -1,6 +1,6 @@
-import { Box, Text, Title, Anchor } from '@mantine/core';
-import { BackgroundEffectsCyan } from '@/components/landingpage/BackgroundEffects/BackgroundEffectsCyan';
-import { ScanlineOverlay } from '@/components/landingpage/ScanlineOverlay/ScanlineOverlay';
+﻿import { Box, Text, Title, Anchor } from '@mantine/core';
+import { BackgroundEffectsCyan } from '@/components/LandingPage/BackgroundEffects/BackgroundEffectsCyan';
+import { ScanlineOverlay } from '@/components/LandingPage/ScanlineOverlay/ScanlineOverlay';
 import { Header } from '@/components/header/Header';
 import classes from './PrivacyPolicy.module.css';
 

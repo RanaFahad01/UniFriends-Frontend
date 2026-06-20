@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { IconAlertCircle, IconArrowLeft } from '@tabler/icons-react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -15,8 +15,8 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { apiFetch } from '@/api/client';
-import { BackgroundEffectsCyan } from '@/components/landingpage/BackgroundEffects/BackgroundEffectsCyan';
-import { ScanlineOverlay } from '@/components/landingpage/ScanlineOverlay/ScanlineOverlay';
+import { BackgroundEffectsCyan } from '@/components/LandingPage/BackgroundEffects/BackgroundEffectsCyan';
+import { ScanlineOverlay } from '@/components/LandingPage/ScanlineOverlay/ScanlineOverlay';
 import { ACADEMIC_TAGS } from '@/constants/tags';
 import { useAuth } from '@/store/AuthContext';
 import type { ApiError } from '@/types/api-error';

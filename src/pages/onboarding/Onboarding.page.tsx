@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { IconCheck, IconLogout, IconX } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -15,8 +15,8 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { apiFetch } from '@/api/client';
-import { BackgroundEffectsCyan } from '@/components/landingpage/BackgroundEffects/BackgroundEffectsCyan';
-import { ScanlineOverlay } from '@/components/landingpage/ScanlineOverlay/ScanlineOverlay';
+import { BackgroundEffectsCyan } from '@/components/LandingPage/BackgroundEffects/BackgroundEffectsCyan';
+import { ScanlineOverlay } from '@/components/LandingPage/ScanlineOverlay/ScanlineOverlay';
 import { ACADEMIC_TAGS, ACTIVITY_TAGS } from '@/constants/tags';
 import { useAuth } from '@/store/AuthContext';
 import type { ApiError } from '@/types/api-error';
@@ -53,7 +53,7 @@ export default function Onboarding() {
     try {
       await apiFetch('/api/auth/logout', { method: 'POST' });
     } finally {
-      // Hard redirect to the landing page — clears React state along with the server cookies
+      // Hard redirect to the landing page â€” clears React state along with the server cookies
       window.location.href = '/';
     }
   };
@@ -72,7 +72,7 @@ export default function Onboarding() {
           return 'Username is required';
         }
         if (!USERNAME_REGEX.test(v)) {
-          return '3–15 characters, letters, numbers, and underscores only';
+          return '3â€“15 characters, letters, numbers, and underscores only';
         }
         return null;
       },
@@ -228,7 +228,7 @@ export default function Onboarding() {
                       order={4}
                       className={`${classes.sectionTitle} ${classes.sectionTitleCyan}`}
                     >
-                      Student — Academic Profile
+                      Student â€” Academic Profile
                     </Title>
                   }
                   labelPosition="left"
@@ -260,7 +260,7 @@ export default function Onboarding() {
                       order={4}
                       className={`${classes.sectionTitle} ${classes.sectionTitleMagenta}`}
                     >
-                      Personality — Extracurriculars Profile
+                      Personality â€” Extracurriculars Profile
                     </Title>
                   }
                   labelPosition="left"

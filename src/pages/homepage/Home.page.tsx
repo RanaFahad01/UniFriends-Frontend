@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { Button } from '@mantine/core';
-import { BackgroundEffectsMagenta } from '@/components/landingpage/BackgroundEffects/BackgroundEffectsMagenta';
-import { HeroSection } from '@/components/landingpage/HeroSection/HeroSection';
-import { LandingHeader } from '@/components/landingpage/LandingHeader/LandingHeader';
-import { ScanlineOverlay } from '@/components/landingpage/ScanlineOverlay/ScanlineOverlay';
-import { SectionCard } from '@/components/landingpage/SectionCard/SectionCard';
+import { BackgroundEffectsMagenta } from '@/components/LandingPage/BackgroundEffects/BackgroundEffectsMagenta';
+import { HeroSection } from '@/components/LandingPage/HeroSection/HeroSection';
+import { LandingHeader } from '@/components/LandingPage/LandingHeader/LandingHeader';
+import { ScanlineOverlay } from '@/components/LandingPage/ScanlineOverlay/ScanlineOverlay';
+import { SectionCard } from '@/components/LandingPage/SectionCard/SectionCard';
 import classes from './Home.page.module.css';
 
 export function HomePage() {
