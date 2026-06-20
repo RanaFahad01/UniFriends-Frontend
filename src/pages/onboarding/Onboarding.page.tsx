@@ -55,7 +55,7 @@ export default function Onboarding() {
     try {
       await apiFetch('/api/auth/logout', { method: 'POST' });
     } finally {
-      // Hard redirect to the landing page â€” clears React state along with the server cookies
+      // Hard redirect to the landing page — clears React state along with the server cookies
       window.location.href = '/';
     }
   };
@@ -74,7 +74,7 @@ export default function Onboarding() {
           return 'Username is required';
         }
         if (!USERNAME_REGEX.test(v)) {
-          return '3â€“15 characters, letters, numbers, and underscores only';
+          return '3–15 characters, letters, numbers, and underscores only';
         }
         return null;
       },
@@ -230,7 +230,7 @@ export default function Onboarding() {
                       order={4}
                       className={`${classes.sectionTitle} ${classes.sectionTitleCyan}`}
                     >
-                      Student â€” Academic Profile
+                      Student — Academic Profile
                     </Title>
                   }
                   labelPosition="left"
@@ -262,7 +262,7 @@ export default function Onboarding() {
                       order={4}
                       className={`${classes.sectionTitle} ${classes.sectionTitleMagenta}`}
                     >
-                      Personality â€” Extracurriculars Profile
+                      Personality — Extracurriculars Profile
                     </Title>
                   }
                   labelPosition="left"
