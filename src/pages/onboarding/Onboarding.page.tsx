@@ -43,7 +43,9 @@ export default function Onboarding() {
   const navigate = useNavigate();
   const { refreshUser } = useAuth();
 
-  useEffect(() => { document.title = 'Create your profile! · UniFriends'; }, []);
+  useEffect(() => {
+    document.title = 'Create your profile! · UniFriends';
+  }, []);
 
   const [usernameStatus, setUsernameStatus] = useState<UsernameStatus>('idle');
   const [submitting, setSubmitting] = useState(false);
@@ -273,6 +275,11 @@ export default function Onboarding() {
                   placeholder="Tell us about your hobbies and interests..."
                   minRows={3}
                   autosize
+                  styles={{
+                    input: {
+                      '--input-bd-focus': 'var(--mantine-color-neonMagenta-6)',
+                    } as React.CSSProperties,
+                  }}
                   {...form.getInputProps('personalityBio')}
                 />
                 <MultiSelect
@@ -282,6 +289,11 @@ export default function Onboarding() {
                   searchable
                   clearable
                   maxValues={5}
+                  styles={{
+                    input: {
+                      '--input-bd-focus': 'var(--mantine-color-neonMagenta-6)',
+                    } as React.CSSProperties,
+                  }}
                   {...form.getInputProps('personalityTags')}
                 />
               </Stack>
