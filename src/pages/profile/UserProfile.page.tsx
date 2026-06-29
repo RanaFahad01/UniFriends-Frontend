@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { IconAlertCircle, IconChevronDown, IconEdit, IconFlag } from '@tabler/icons-react';
+import { IconAlertCircle, IconArrowLeft, IconChevronDown, IconEdit, IconFlag } from '@tabler/icons-react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
+  ActionIcon,
   Alert,
   Avatar,
   Badge,
@@ -166,6 +167,12 @@ export default function UserProfilePage({ type }: UserProfilePageProps) {
   return (
     <Box className={classes.page}>
       <Box className={classes.container}>
+        <Group gap="sm" align="center" mb="1.25rem">
+          <ActionIcon variant="subtle" color="gray" size="lg" onClick={() => navigate(-1)} aria-label="Go back">
+            <IconArrowLeft size={20} />
+          </ActionIcon>
+        </Group>
+
         {/* Avatar + Username */}
         <Box className={classes.avatarSection}>
           <Avatar src={profile.avatarUrl} imageProps={{ referrerPolicy: 'no-referrer' }} size={96} radius="xl" alt={profile.username ?? 'User'} />

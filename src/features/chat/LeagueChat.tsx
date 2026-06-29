@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Box, Center, Loader, ScrollArea, Stack, Text } from '@mantine/core';
+import { IconArrowLeft } from '@tabler/icons-react';
+import { ActionIcon, Box, Center, Group, Loader, ScrollArea, Stack, Text } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '@/api/client';
 import { useAuth } from '@/store/AuthContext';
 import type { ChatMessage } from '@/types/chat';
@@ -17,6 +19,7 @@ interface LeagueChatProps {
 
 export function LeagueChat({ leagueId, leagueName, mode }: LeagueChatProps) {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [realtimeMessages, setRealtimeMessages] = useState<ChatMessage[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -86,9 +89,14 @@ export function LeagueChat({ leagueId, leagueName, mode }: LeagueChatProps) {
   return (
     <Box className={classes.container} data-variant={mode}>
       <Box className={classes.header} data-variant={mode}>
-        <Text size="xs" fw={700} ff="heading" className={classes.headerText} data-variant={mode}>
-          {leagueName}
-        </Text>
+        <Group gap="xs" align="center">
+          <ActionIcon variant="subtle" color="gray" size="sm" onClick={() => navigate(-1)} aria-label="Go back">
+            <IconArrowLeft size={16} />
+          </ActionIcon>
+          <Text size="xs" fw={700} ff="heading" className={classes.headerText} data-variant={mode}>
+            {leagueName}
+          </Text>
+        </Group>
       </Box>
 
       <ScrollArea
