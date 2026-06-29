@@ -160,7 +160,7 @@ export function Header() {
           <Divider my="sm" />
           {links.map((link) => {
             if (link.links) {
-              return <DrawerLinksGroup key={link.label} link={link} />;
+              return <DrawerLinksGroup key={link.label} link={link} onNavigate={close} />;
             }
 
             return (
@@ -183,8 +183,10 @@ export function Header() {
 
 function DrawerLinksGroup({
   link,
+  onNavigate,
 }: {
   link: { link: string; label: string; links?: { link: string; label: string }[] };
+  onNavigate: () => void;
 }) {
   const [opened, { toggle }] = useDisclosure(false);
 
@@ -215,6 +217,7 @@ function DrawerLinksGroup({
                 link.label === 'Extracurriculars' && classes.extracurriculars,
                 link.label === 'Leagues' && classes.leagues
               )}
+              onClick={onNavigate}
             >
               {subLink.label}
             </NavLink>
